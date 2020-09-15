@@ -7,7 +7,13 @@ var http = require('http'),
     cors = require('cors'),
     passport = require('passport'),
     errorhandler = require('errorhandler'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+
+    swaggerUi = require('swagger-ui-express');
+
+//// Swagger ////
+var swaggerDocument = require('./swagger.json');
+swaggerDocument.host="localhost:3000"
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -33,16 +39,20 @@ if (!isProduction) {
 if(isProduction){
   mongoose.connect(process.env.MONGODB_URI);
 } else {
-  mongoose.connect('mongodb://localhost/conduit');
+  mongoose.connect('mongodb://localhost/conduit_nodejs');
   mongoose.set('debug', true);
 }
 
 require('./models/User');
 require('./models/Article');
+require('./models/Car');
 require('./models/Comment');
 require('./config/passport');
 
 app.use(require('./routes'));
+
+//// Swagger ////
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -79,6 +89,7 @@ app.use(function(err, req, res, next) {
 });
 
 // finally, let's start our server...
-var server = app.listen( process.env.PORT || 3000, function(){
+// var server = app.listen( process.env.PORT || 3000, function(){
+var server = app.listen( 3000, function(){
   console.log('Listening on port ' + server.address().port);
 });
