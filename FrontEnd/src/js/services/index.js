@@ -3,7 +3,6 @@ import angular from 'angular';
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', []);
 
-
 import UserService from './user.service';
 servicesModule.service('User', UserService);
 
@@ -19,8 +18,10 @@ servicesModule.service('Articles', ArticlesService);
 import CommentsService from './comments.service';
 servicesModule.service('Comments', CommentsService);
 
+import CarService from './cars.service';
+servicesModule.service('Cars', CarService);
+
 import TagsService from './tags.service';
 servicesModule.service('Tags', TagsService);
-
 
 export default servicesModule;

@@ -17,7 +17,6 @@ function ArticleConfig($stateProvider) {
       }
     }
   });
-
 };
 
 export default ArticleConfig;
