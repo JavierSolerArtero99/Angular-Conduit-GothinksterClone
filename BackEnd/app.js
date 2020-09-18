@@ -50,6 +50,7 @@ if(isProduction){
 require('./models/User');
 require('./models/Article');
 require('./models/Car');
+require('./models/Motorbike');
 require('./models/Comment');
 require('./config/passport');
 
