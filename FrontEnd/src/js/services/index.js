@@ -21,6 +21,9 @@ servicesModule.service('Comments', CommentsService);
 import CarService from './cars.service';
 servicesModule.service('Cars', CarService);
 
+import MotorbikeService from './motorbike.service';
+servicesModule.service('Motorbikes', MotorbikeService);
+
 import TagsService from './tags.service';
 servicesModule.service('Tags', TagsService);
 

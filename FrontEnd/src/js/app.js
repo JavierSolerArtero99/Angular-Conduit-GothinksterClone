@@ -18,6 +18,7 @@ import './auth';
 import './settings';
 import './editor';
 import './car';
+import './motorbike';
 
 // Create and bootstrap application
 const requires = [
@@ -32,7 +33,8 @@ const requires = [
   'app.auth',
   'app.settings',
   'app.editor',
-  'app.car'
+  'app.car',
+  'app.motorbike'
 ];
 
 // Mount on window for testing
