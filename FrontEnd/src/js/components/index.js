@@ -2,7 +2,6 @@ import angular from 'angular';
 
 let componentsModule = angular.module('app.components', []);
 
-
 import ListErrors from './list-errors.component'
 componentsModule.component('listErrors', ListErrors);
 
@@ -26,5 +25,8 @@ componentsModule.component('articleList', ArticleList);
 
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
+
+import MotorbikeList from './motorbike-helper/motorbike-list.component';
+componentsModule.component('motorbikeList', MotorbikeList);
 
 export default componentsModule;

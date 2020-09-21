@@ -19,7 +19,6 @@ export default class Motorbikes {
             url: this._AppConstants.api + '/motorbikes/ ',
             method: 'GET',
         }).then(res => {
-            console.log(res.data.motorbikes)
             return res.data.motorbikes;
         });
     }

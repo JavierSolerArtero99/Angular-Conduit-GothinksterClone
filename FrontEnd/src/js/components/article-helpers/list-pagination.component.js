@@ -23,7 +23,7 @@ class ListPaginationCtrl {
 
 }
 
-let ListPagination= {
+let ListPagination = {
   bindings: {
     totalPages: '=',
     currentPage: '='
