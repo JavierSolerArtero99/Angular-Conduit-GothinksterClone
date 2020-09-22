@@ -1,8 +1,12 @@
 class MotorbikeListCtrl {
-    constructor(Motorbikes, $scope) {
+    constructor(Motorbikes, $scope, $state) {
         'ngInject';
 
         this._$scope = $scope;
+        this._$state = $state;
+        this._$scope.openDetails = function () {
+            $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
+        };
     }
 }
 

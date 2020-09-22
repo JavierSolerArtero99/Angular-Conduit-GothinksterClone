@@ -35,7 +35,7 @@ export default class Motorbikes {
             url: this._AppConstants.api + '/motorbikes/' + slug,
             method: 'GET'
         }).then(
-            (res) => { deferred.resolve(res.data.motorbikes); console.log(res.data.motorbikes) },
+            (res) =>{ deferred.resolve(res.data.motorbike); console.log(res.data.motorbike)},
             (err) => deferred.reject(err)
         );
 

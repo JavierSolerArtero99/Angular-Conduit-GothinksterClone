@@ -34,7 +34,8 @@ const requires = [
   'app.settings',
   'app.editor',
   'app.car',
-  'app.motorbike'
+  'app.motorbike',
+  'app.motorbikeDetails'
 ];
 
 // Mount on window for testing
