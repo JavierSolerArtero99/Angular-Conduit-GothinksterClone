@@ -28,9 +28,9 @@ function MotorbikeConfig($stateProvider) {
       title: 'Motorbike Details',
       resolve: {
         motorbike: function (Motorbikes, $state, $stateParams) {
-          console.log($stateParams)
           return Motorbikes.getMotorbike($stateParams.id).then(
-            (data) => data.motorbike
+            (motorbike) => motorbike,
+            (err) => $state.go('app.home')
           )
         }
       }
