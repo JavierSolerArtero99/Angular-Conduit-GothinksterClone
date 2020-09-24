@@ -25,7 +25,18 @@ function AuthConfig($stateProvider, $httpProvider) {
         return User.ensureAuthIs(false);
       }
     }
-  });
+  })
+
+  .state('app.sociallogin', {
+    url: '/auth/sociallogin',
+    controller: 'SocialCtrl as $ctrl',
+    title: 'Sign up by a Social login',
+    resolve: {
+      auth: function(User) {
+        return User.ensureAuthIs(false);
+      }
+    }
+  })
 
 };
 
