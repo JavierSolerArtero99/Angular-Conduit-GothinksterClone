@@ -47,6 +47,9 @@ passport.use(new GithubStrategy({
       if (user) {
         return done(null, user);
       } else {
+        console.log("=======PROFILE=======")
+        console.log(profile.emails)
+        console.log("==============")
         if (!profile.emails[0].value) {
           return done("The email is private");
         } else {

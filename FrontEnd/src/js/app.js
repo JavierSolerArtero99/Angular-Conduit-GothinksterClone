@@ -35,7 +35,8 @@ const requires = [
   'app.editor',
   'app.car',
   'app.motorbike',
-  'app.motorbikeDetails'
+  'app.motorbikeDetails',
+  'app.sociallogin'
 ];
 
 // Mount on window for testing
