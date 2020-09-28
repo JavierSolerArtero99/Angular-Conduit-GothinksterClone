@@ -47,9 +47,6 @@ passport.use(new GithubStrategy({
       if (user) {
         return done(null, user);
       } else {
-        console.log("=======PROFILE=======")
-        console.log(profile.emails)
-        console.log("==============")
         if (!profile.emails[0].value) {
           return done("The email is private");
         } else {
@@ -60,6 +57,8 @@ passport.use(new GithubStrategy({
             email: profile.emails[0].value,
             image: profile.photos[0].value
           });
+          console.log("============================================================================================");
+          console.log(user)
           user.save(function (err) {
             if (err) {
               console.log(err);

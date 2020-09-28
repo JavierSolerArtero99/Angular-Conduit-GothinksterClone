@@ -60,6 +60,26 @@ router.post('/users/login', function (req, res, next) {
   })(req, res, next);
 });
 
+router.post('user/register', function (req, res, next) {
+  User.find({ $or: [{ email: req.body.user.email }, { username: req.body.user.username }] })
+    .then(function (user) {
+      console.log(`USER: ${user}`)
+      if (user[0]) {
+        return res.status(422).json("The email or username is already created");
+      } else {
+        var user = new User();
+        user.idsocial = req.body.user.username;
+        user.username = req.body.user.username;
+        user.email = req.body.user.email;
+        user.type = "client";
+        user.setPassword(req.body.user.password);
+        user.save().then(function () {
+          return res.json({ user: user.toAuthJSON() });
+        }).catch(next);
+      }
+    });
+})
+
 router.post('/users', function (req, res, next) {
   var user = new User();
   console.log("===============================")
