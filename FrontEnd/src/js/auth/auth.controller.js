@@ -14,8 +14,6 @@ class AuthCtrl {
     };
 
     this.authSubmit = function () {
-      console.log("Se ha clicado en el authSubmit")
-      console.log(this.authForm);
 
       this.disabledForm = true;
       User.attemptAuth(this.authType, this.authForm).then(
