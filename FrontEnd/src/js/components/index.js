@@ -32,4 +32,7 @@ componentsModule.component('motorbikeList', MotorbikeList);
 import MotorbikeDetails from './motorbike-helper/motorbike-details.component';
 componentsModule.component('motorbikeDetails', MotorbikeDetails);
 
+import homeSlider from './../home/homeSlider.component';
+componentsModule.component('homeSlider', homeSlider);
+
 export default componentsModule;

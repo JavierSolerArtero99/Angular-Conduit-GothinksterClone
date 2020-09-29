@@ -15,4 +15,4 @@ let homeSlider = {
     templateUrl: 'home/homeSlider.html'
 };
 
-export default homeSliderCtrl;
+export default homeSlider;
