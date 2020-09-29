@@ -21,7 +21,7 @@
           <fieldset ng-disabled="$ctrl.disabledForm">
 
             <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
-              <input required class="form-control form-control-lg" type="text" placeholder="Username"
+              <input required class="form-control form-control-lg" type="text" placeholder="Username" name="Username"
                 ng-model="$ctrl.authForm.username" ng-minlength="3" ng-maxlength="20" />
               <div ng-messages="authForm.Username.$error" style="color: red; font-weight: bold;">
                 <p ng-message="required" ng-show="authForm.Username.$dirty">Username is required</p>
@@ -40,33 +40,36 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <input required class="form-control form-control-lg" type="password" placeholder="Password"
-                ng-model="$ctrl.authForm.password" name="Password" ng-minlength="6" ng-maxlength="40" />
-              <div ng-messages="authForm.Password.$error" style="color: red; font-weight: bold;">
-                <p ng-messages="required" ng-show="authForm.Password.$dirty">Password is required.</p>
-                <p ng-messages="minlength">Enter more than 6 characters.</p>
-                <p ng-messages="maxlength">Enter less than 40 characters.</p>
+              <input required name="Password" class="form-control form-control-lg" type="password"
+                placeholder="Password" ng-model="$ctrl.authForm.password" ng-minlength="6" ng-maxlength="20" />
+              <div ng-messages="authForm.Password.$error" style="color: red; font-weight: bold" role="alert">
+                <p ng-message="minlength" >Password must has got more than 6 caracters</p>
+                <p ng-message="required" ng-show="authForm.password.$dirty">Password is required</p>
+                <p ng-message="maxlength">Password must has got less than 20 caracters</p>
               </div>
-            </fieldset>
-
-            <fieldset class="form-group" ng-show="$ctrl.authType === 'register'">
-              <input required class="form-control form-control-lg" type="password" placeholder="Repeat Password" ng-model="$ctrl.authForm.rpassword">
-              <!-- continua el ngshow del span pero nno se ve -->
-              <span style="color: red; font-weight: bold;" ng-show="authForm.rPassword.$error.required && (authForm.rPassword.$dirty || false)"></span>
-              <span style="color: red; font-weight: bold;" ng-show="$ctrl.authForm.rpassword != $ctrl.authForm.password && (authForm.rPassword.$dirty || false)"></span>
             </fieldset>
 
             <fieldset ng-show="$ctrl.authType === 'register'">
               <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title"
-                ng-show="authForm.Username.$valid && authForm.Email.$valid && authForm.Password.$valid && authForm.rPassword.$valid "
-                ng-click="$ctrl.authSubmit()"><!--continua el ng-show --></button>
-                <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title"
-                ng-show="authForm.Username.$valid && authForm.Email.$valid && authForm.Password.$valid && authForm.rPassword.$valid "
-                ng-click="$ctrl.nvalidSubmit()"><!--continua el ng-show --></button>
+                ng-show="authForm.Username.$valid && authForm.Email.$valid && authForm.Password.$valid"
+                ng-click="$ctrl.authSubmit()">
+                <!--continua el ng-show --></button>
+              <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title"
+                ng-show="!(authForm.Username.$valid && authForm.Email.$valid && authForm.Password.$valid)"
+                ng-click="$ctrl.nvalidSubmit()">
+                <!--continua el ng-show --></button>
             </fieldset>
 
-            <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title">
-            </button>
+            <fieldset ng-show="$ctrl.authType === 'login'">
+              <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title"
+                ng-show="authForm.Email.$valid && authForm.Password.$valid"
+                ng-click="$ctrl.authSubmit()">
+                <!--continua el ng-show --></button>
+              <button class="btn btn-lg btn-primary pull-xs-right" type="submit" ng-bind="::$ctrl.title"
+                ng-show="!(authForm.Email.$valid && authForm.Password.$valid)"
+                ng-click="$ctrl.nvalidSubmit()">
+                <!--continua el ng-show --></button>
+            </fieldset>
 
           </fieldset>
         </form>

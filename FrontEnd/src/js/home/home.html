@@ -1,5 +1,5 @@
- <div class="home-page">
-
+<div class="home-page">
+  <home-slider-cmp></home-slider-cmp>
   <!-- Splash banner that only shows when not logged in -->
   <div class="banner" show-authed="false">
     <div class="container">
@@ -19,8 +19,7 @@
           <ul class="nav nav-pills outline-active">
 
             <li class="nav-item" show-authed="true">
-              <a href="" class="nav-link"
-                ng-class="{ active: $ctrl.listConfig.type === 'feed' }"
+              <a href="" class="nav-link" ng-class="{ active: $ctrl.listConfig.type === 'feed' }"
                 ng-click="$ctrl.changeList({ type: 'feed' })">
                 Your Feed
               </a>
@@ -56,8 +55,7 @@
 
           <div class="tag-list" ng-show="$ctrl.tags">
             <a href="" class="tag-default tag-pill"
-              ng-click="$ctrl.changeList({ type: 'all', filters: { tag: tagName } })"
-              ng-repeat="tagName in $ctrl.tags"
+              ng-click="$ctrl.changeList({ type: 'all', filters: { tag: tagName } })" ng-repeat="tagName in $ctrl.tags"
               ng-bind="tagName">
             </a>
           </div>
@@ -66,8 +64,7 @@
             Loading tags...
           </div>
 
-          <div class="post-preview"
-            ng-show="$ctrl.tagsLoaded && !$ctrl.tags.length">
+          <div class="post-preview" ng-show="$ctrl.tagsLoaded && !$ctrl.tags.length">
             No tags are here... yet.
           </div>
 

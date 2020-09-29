@@ -7,35 +7,39 @@ class AuthCtrl {
     this.title = $state.current.title;
     this.authType = $state.current.name.replace('app.', '');
 
-    this.nvalidSubmit = function () {
-      Toastr.showToastr('error', 'Rellena todos los campos del formulario correctamente');
+    this.nvalidSubmit = function (error) {
+      console.log("ERRRRRRRRRRRRRRRRRROR")
+      console.log(error)
+      Toastr.showToastr('error', error);
     };
+
     this.authSubmit = function () {
       console.log("Se ha clicado en el authSubmit")
+      console.log(this.authForm);
+
       this.disabledForm = true;
-      if (this.authType === 'register') {
-        User.attemptAuth(this.authType, this.authForm).then(
-          (res) => {
-            Toastr.showToastr('success', 'Successfully Logged In');
-            $state.go('app.home');
-          },
-          (err) => {
-            console.log(err);
-            this.disabledForm = false;
-            if (err.data) {
-              Toastr.showToastr('error', err.data);
-            } else {
-              Toastr.showToastr('error', 'Error')
-            }
+      User.attemptAuth(this.authType, this.authForm).then(
+        (res) => {
+          Toastr.showToastr('success', 'Successfully Logged In');
+          $state.go('app.home');
+        },
+        (err) => {
+          console.log(err);
+          this.disabledForm = false;
+          if (err.data.errors) {
+            this.nvalidSubmit("Rellena correctamente los datos del formulario")
+          } else {
+            this.nvalidSubmit(err.data)
           }
-        )
-      }
+        }
+      )
     }
 
   }
 
   submitForm() {
     this.isSubmitting = true;
+    console.log("Login")
 
     this._User.attemptAuth(this.authType, this.formData).then(
       (res) => {

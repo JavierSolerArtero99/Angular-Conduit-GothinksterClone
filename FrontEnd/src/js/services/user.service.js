@@ -12,11 +12,13 @@ export default class User {
 
   }
 
-
   attemptAuth(type, credentials) {
-    let route = (type === 'login') ? '/login' : '';
-    route = (type === 'sociallogin') ? '/sociallogin' : '';
-    
+    let route = (type === 'login') ? '/login' : (type === 'sociallogin') ? '/sociallogin' : '';
+
+    console.log("===========")
+    console.log(type)
+    console.log(credentials)
+
     return this._$http({
       url: this._AppConstants.api + '/users' + route,
       method: 'POST',
@@ -35,7 +37,7 @@ export default class User {
 
   update(fields) {
     return this._$http({
-      url:  this._AppConstants.api + '/user',
+      url: this._AppConstants.api + '/user',
       method: 'PUT',
       data: { user: fields }
     }).then(
@@ -103,5 +105,4 @@ export default class User {
 
     return deferred.promise;
   }
-
 }

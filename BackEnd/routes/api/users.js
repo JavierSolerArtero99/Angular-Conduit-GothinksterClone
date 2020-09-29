@@ -60,7 +60,8 @@ router.post('/users/login', function (req, res, next) {
   })(req, res, next);
 });
 
-router.post('user/register', function (req, res, next) {
+router.post('/users/', function (req, res, next) {
+  console.log("BUENAS TARDES");
   User.find({ $or: [{ email: req.body.user.email }, { username: req.body.user.username }] })
     .then(function (user) {
       console.log(`USER: ${user}`)
@@ -79,26 +80,6 @@ router.post('user/register', function (req, res, next) {
       }
     });
 })
-
-router.post('/users', function (req, res, next) {
-  var user = new User();
-  console.log("===============================")
-  console.log("===============================")
-  console.log("===============================")
-  console.log("===============================")
-  console.log(req.body)
-  console.log("===============================")
-  console.log("===============================")
-  console.log("===============================")
-  console.log("===============================")
-  user.username = req.body.user.username;
-  user.email = req.body.user.email;
-  user.setPassword(req.body.user.password);
-
-  user.save().then(function () {
-    return res.json({ user: user.toAuthJSON() });
-  }).catch(next);
-});
 
 /****LOGIN WITH SOCIAL CREDENTIALS****/
 
