@@ -8,8 +8,6 @@ class AuthCtrl {
     this.authType = $state.current.name.replace('app.', '');
 
     this.nvalidSubmit = function (error) {
-      console.log("ERRRRRRRRRRRRRRRRRROR")
-      console.log(error)
       Toastr.showToastr('error', error);
     };
 
@@ -22,12 +20,15 @@ class AuthCtrl {
           $state.go('app.home');
         },
         (err) => {
+          console.log("=============");
           console.log(err);
+          console.log("=============");
           this.disabledForm = false;
-          if (err.data.errors) {
-            this.nvalidSubmit("Rellena correctamente los datos del formulario")
-          } else {
+          if (err.data) {
             this.nvalidSubmit(err.data)
+          } else {
+            console.logI("fd")
+            // this.nvalidSubmit(err.data)
           }
         }
       )
