@@ -1,20 +1,22 @@
-var gulp          = require('gulp');
-var notify        = require('gulp-notify');
-var source        = require('vinyl-source-stream');
-var browserify    = require('browserify');
-var babelify      = require('babelify');
-var ngAnnotate    = require('browserify-ngannotate');
-var browserSync   = require('browser-sync').create();
-var rename        = require('gulp-rename');
+var gulp = require('gulp');
+var notify = require('gulp-notify');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var ngAnnotate = require('browserify-ngannotate');
+var browserSync = require('browser-sync').create();
+var rename = require('gulp-rename');
 var templateCache = require('gulp-angular-templatecache');
-var uglify        = require('gulp-uglify');
-var merge         = require('merge-stream');
+var uglify = require('gulp-uglify');
+var merge = require('merge-stream');
 
 // Where our files are located
-var jsFiles   = "src/js/**/*.js";
+var jsFiles = "src/js/**/*.js";
 var viewFiles = "src/js/**/*.html";
+var cssFiles = "src/css/**/*.css";
+var imgFiles = "src/img/**/*.jpg"
 
-var interceptErrors = function(error) {
+var interceptErrors = function (error) {
   var args = Array.prototype.slice.call(arguments);
 
   // Send error to notification center with gulp-notify
@@ -27,49 +29,65 @@ var interceptErrors = function(error) {
   this.emit('end');
 };
 
-
-gulp.task('browserify', ['views'], function() {
+gulp.task('browserify', ['views'], function () {
   return browserify('./src/js/app.js')
-      .transform(babelify, {presets: ["es2015"]})
-      .transform(ngAnnotate)
-      .bundle()
-      .on('error', interceptErrors)
-      //Pass desired output filename to vinyl-source-stream
-      .pipe(source('main.js'))
-      // Start piping stream to tasks!
-      .pipe(gulp.dest('./build/'));
+    .transform(babelify, { presets: ["es2015"] })
+    .transform(ngAnnotate)
+    .bundle()
+    .on('error', interceptErrors)
+    //Pass desired output filename to vinyl-source-stream
+    .pipe(source('main.js'))
+    // Start piping stream to tasks!
+    .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('html', function() {
+gulp.task('html', function () {
   return gulp.src("src/index.html")
-      .on('error', interceptErrors)
-      .pipe(gulp.dest('./build/'));
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('views', function() {
+gulp.task('views', function () {
   return gulp.src(viewFiles)
-      .pipe(templateCache({
-        standalone: true
-      }))
-      .on('error', interceptErrors)
-      .pipe(rename("app.templates.js"))
-      .pipe(gulp.dest('./src/js/config/'));
+    .pipe(templateCache({
+      standalone: true
+    }))
+    .on('error', interceptErrors)
+    .pipe(rename("app.templates.js"))
+    .pipe(gulp.dest('./src/js/config/'));
 });
+
+//CSS 
+gulp.task('css', function () {
+  return gulp.src("src/css/*.css")
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/css'));
+})
+
+// Images
+gulp.task('img', function () {
+  return gulp.src("src/img/*.*")
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/img'));
+})
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
-gulp.task('build', ['html', 'browserify'], function() {
+gulp.task('build', ['html', 'css', 'browserify'], function () {
   var html = gulp.src("build/index.html")
-                 .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./dist/'));
+
+  var css = gulp.src("build/style.css")
+    .pipe(gulp.dest('./dist'));
 
   var js = gulp.src("build/main.js")
-               .pipe(uglify())
-               .pipe(gulp.dest('./dist/'));
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/'));
 
-  return merge(html,js);
+  return merge(html, js, css);
 });
 
-gulp.task('default', ['html', 'browserify'], function() {
+gulp.task('default', ['html', 'css', 'img', 'browserify'], function () {
 
   browserSync.init(['./build/**/**.**'], {
     server: "./build",
@@ -82,5 +100,7 @@ gulp.task('default', ['html', 'browserify'], function() {
 
   gulp.watch("src/index.html", ['html']);
   gulp.watch(viewFiles, ['views']);
+  gulp.watch(cssFiles, ['css']);
+  gulp.watch(imgFiles, ['img']);
   gulp.watch(jsFiles, ['browserify']);
 });

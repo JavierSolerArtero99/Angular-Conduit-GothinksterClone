@@ -8,6 +8,9 @@ class CarCtrl {
         this._$scope.cars = cars;
         this.currentUser = User.current;
     }
+
+    
+
 }
 
 export default CarCtrl;

@@ -25,8 +25,6 @@ class HomeCtrl {
   changeList(newList) {
     this._$scope.$broadcast('setListTo', newList);
   }
-
-
 }
 
 export default HomeCtrl;

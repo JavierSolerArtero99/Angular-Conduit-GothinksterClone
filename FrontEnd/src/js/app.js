@@ -4,6 +4,7 @@ import angular from 'angular';
 import constants  from './config/app.constants';
 import appConfig  from './config/app.config';
 import appRun     from './config/app.run';
+import 'angular-ui-bootstrap';
 import 'angular-ui-router';
 import toastr from "angular-toastr";
 import "angular-messages";
@@ -25,6 +26,7 @@ import './motorbike';
 // Create and bootstrap application
 const requires = [
   'ui.router',
+  'ui.bootstrap',
   'templates',
   'app.layout',
   'app.components',

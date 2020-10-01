@@ -1,6 +1,11 @@
-<div ng-repeat="car in cars">
-    <h2>{{car.name}}</h2>
-    <p>{{car.cv}}</p>
-    <p>{{car.color}}</p>
-    <p> Owner: {{car.owner.username}}</p>
+<div style="margin-left: 100px;">
+    <label for="">CV Filter</label>
+    <input style="margin-top: 50px; margin-bottom: 50px;" type="text" name="" id="">
+
+    <div ng-repeat="car in cars">
+        <h2>{{car.name}}</h2>
+        <p>{{car.cv}}</p>
+        <p>{{car.color}}</p>
+        <p> Owner: {{car.owner.username}}</p>
+    </div>
 </div>

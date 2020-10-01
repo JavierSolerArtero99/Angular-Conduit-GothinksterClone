@@ -10,6 +10,8 @@
     "angular-messages": "^1.7.5",
     "angular-toastr": "^2.1.1",
     "babel-preset-es2015": "^6.3.13",
+    "angular-ui-bootstrap": "^2.5.0",
+    "bootstrap-css-only": "^4.1.1",
     "babelify": "^7.2.0",
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
