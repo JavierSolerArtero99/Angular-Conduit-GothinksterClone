@@ -12,9 +12,21 @@ class CarCtrl {
         this.filtering = false;
         this.cvFilter = "";
         this.filter = function () {
-            console.log("Filtering")
-            let aux = [this._$scope.cars[0]]
+            this.filtering = true
+            this.noResults = false
+            this._$scope.cars = cars
+
+            let aux = this._$scope.cars.filter((element) => element.cv === this.cvFilter);
             this._$scope.cars = aux
+
+            if (this._$scope.cars.length < 1) {
+                this.noResults = true
+            }
+        }
+
+        this.cleanFilter = function () {
+            this.filtering = false;
+            this._$scope.cars = cars;
         }
     }
 
