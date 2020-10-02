@@ -9,6 +9,12 @@ class MotorbikeListCtrl {
             $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
         };
     }
+
+    filter() {
+        console.log("Filtering")
+        let aux = [this.motorbikes[0]]
+        this.motorbikes = aux
+    }
 }
 
 let MotorbikeList = {

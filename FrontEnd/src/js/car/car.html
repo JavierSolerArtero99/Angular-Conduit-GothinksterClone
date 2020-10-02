@@ -1,6 +1,18 @@
 <div style="margin-left: 100px;">
     <label for="">CV Filter</label>
-    <input style="margin-top: 50px; margin-bottom: 50px;" type="text" name="" id="">
+    <input style="margin-top: 50px; margin-left: 20px; margin-bottom: 50px; border-radius: 20px; border-style: solid;"
+        type="text" name="" id="" ng-model="$ctrl.cvFilter">
+
+    <button
+        style="border-radius: 20px; border-style: solid; border-width: 2px; margin-left:  20px; background-color: #818a91; text-align: center; height: 50px; width: 100px;"
+        type="button" ng-click="$ctrl.filter()">
+        Filter
+    </button>
+
+    <button
+        style="border-radius: 20px; border-style: solid; border-width: 2px; margin-left:  20px; background-color: #818a91; text-align: center; height: 50px; width: 100px;">
+        Clean Filter
+    </button>
 
     <div ng-repeat="car in cars">
         <h2>{{car.name}}</h2>

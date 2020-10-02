@@ -2,12 +2,18 @@
 
   <home-slider></home-slider>
 
-  <div ui-sref="app.car">
-    <p id="test">Cars</p>
-  </div>
+  <div style="margin-top: 20px; text-align: center;">
+  <h2 style="margin-top: 15px; margin-left: 50px; margin-bottom: 20px;">Categories</h2>
+    <div ui-sref="app.motorbike"
+      style="display: inline-block; padding-top: 12px; border-radius: 20px; border-width: 5px; margin-left:  50px; background-color: #818a91; text-align: center; height: 50px; width: 100px;">
+      <p style="color: white;">Motorbikes</p>
+    </div>
 
-  <div style="border-radius: 20; border-width: 5px; margin-left:  50px; border-color: chartreuse;" ui-sref="app.motorbike">
-    <p style="color: chartreuse;">Motorbikes</p>
+    <div ui-sref="app.car"
+      style="display: inline-block; padding-top: 12px; border-radius: 20px; border-width: 5px; margin-left:  50px; background-color: #818a91; text-align: center; height: 50px; width: 100px;">
+      <p style="color: white;">Cars</p>
+    </div>
+
   </div>
 
   <!-- Splash banner that only shows when not logged in -->
