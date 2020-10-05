@@ -4,7 +4,7 @@ var Motorbike = mongoose.model('Motorbike');
 var User = mongoose.model('User');
 var auth = require('../auth');
 
-// Preload motorbike objects on routes with ':motorbike'
+// Preload motorbike objects on routes with '/motorbike'
 router.param('motorbike', function (req, res, next, slug) {
     Motorbike.findOne({ slug: slug })
         .populate('owner')
@@ -17,6 +17,9 @@ router.param('motorbike', function (req, res, next, slug) {
         }).catch(next);
 });
 
+/* CRUD */
+
+/* Obtiene todas las motos */
 router.get('/', auth.optional, function (req, res, next) {
     var query = {};
     var limit = 20;
@@ -67,6 +70,7 @@ router.get('/', auth.optional, function (req, res, next) {
     }).catch(next);
 });
 
+/* Postea una nueva moto */
 router.post('/', auth.required, function (req, res, next) {
     console.log("-Se va a añadir un nuevo motorbike-")
     User.findById(req.payload.id).then(function (user) {
@@ -85,7 +89,7 @@ router.post('/', auth.required, function (req, res, next) {
     }).catch(next);
 });
 
-// return a motorbike
+/* Obtiene una moto */
 router.get('/:motorbike', auth.optional, function (req, res, next) {
     Promise.all([
         req.payload ? User.findById(req.payload.id) : null,
@@ -97,7 +101,7 @@ router.get('/:motorbike', auth.optional, function (req, res, next) {
     }).catch(next);
 });
 
-// update motorbike
+/* Modifica una  moto */
 router.put('/:motorbike', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
         if (req.motorbike.owner._id.toString() === req.payload.id.toString()) {
@@ -123,7 +127,7 @@ router.put('/:motorbike', auth.required, function (req, res, next) {
     });
 });
 
-// delete motorbike
+/* Elimina una moto */
 router.delete('/:motorbike', auth.required, function (req, res, next) {
     User.findById(req.payload.id).then(function (user) {
         if (!user) { return res.sendStatus(401); }
@@ -137,5 +141,32 @@ router.delete('/:motorbike', auth.required, function (req, res, next) {
         }
     }).catch(next);
 });
+
+/* FAVORITES */
+
+router.post('/:motorbike/favorite', auth.required, function (req, res, next) {
+    var motorbikeId = req.motorbike._id;
+
+    console.log("==============================MotorbikeID==============================");
+    console.log(req.motorbike._id);
+
+    User.findById(req.payload.id).then(function (user) {
+        if (!user) { return res.sendStatus(401); }
+
+        return user.favoriteMotorbikes(motorbikeId).then(function () {
+            return req.motorbike.updateFavoriteCount().then(function (motorbike) {
+                console.log("=================\nSEGUNDO PASO COMPLETADO\n=================")
+                return res.json({ motorbike: motorbike.toJSONFor(user) });
+            });
+        });
+    }).catch(next);
+});
+
+/* FAVORITES */
+
+
+
+/* FAVORITES */
+
 
 module.exports = router;
