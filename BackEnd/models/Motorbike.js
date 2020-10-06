@@ -30,7 +30,7 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
   var motorbike = this;
 
   return User.count({
-    favorites: {
+    favoritesMotorbikes: {
       $in: [motorbike._id]
     }
   }).then(function (count) {
