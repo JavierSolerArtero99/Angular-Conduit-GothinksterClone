@@ -9,6 +9,7 @@ var MotorbikeSchema = new mongoose.Schema({
   cv: String,
   color: String,
   favoritesCount: { type: Number, default: 0 },
+  motorbikeComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MotorbikeComment' }],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });
 

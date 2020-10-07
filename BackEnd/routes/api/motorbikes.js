@@ -2,7 +2,9 @@ var router = require('express').Router();
 var mongoose = require('mongoose');
 var Motorbike = mongoose.model('Motorbike');
 var User = mongoose.model('User');
+var MotorbikeComment = mongoose.model('MotorbikeComment');
 var auth = require('../auth');
+const { use } = require('./articles');
 
 // Preload motorbike objects on routes with '/motorbike'
 router.param('motorbike', function (req, res, next, slug) {
@@ -162,11 +164,67 @@ router.post('/:motorbike/favorite', auth.required, function (req, res, next) {
     }).catch(next);
 });
 
-/* FAVORITES */
+/* COMMENTS */
 
+/* Obtiene los comentarios de una moto */
+router.get('/:motorbike/comments', auth.optional, function (req, res, next) {
+    console.log("comentario")
+    console.log(req.motorbike);
+    Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
+        console.log("USEEEEEEEEEER")
+        console.log(user)
+        return req.motorbike.populate({
+            path: 'motorbikeComments',
+            populate: {
+                path: 'owner'
+            },
+            options: {
+                sort: {
+                    createdAt: 'desc'
+                }
+            }
+        }).execPopulate().then(function (motorbike) {
+            console.log(req.motorbike.motorbikeComments)
+            return res.json({
+                motorbikeComments: req.motorbike.motorbikeComments.map(function (comment) {
+                    return comment.toJSONFor(user);
+                })
+            });
+        });
+    }).catch(next);
+});
 
+/* Crea un comentario asociado a una moto */
+router.post('/:motorbike/comments', auth.required, function (req, res, next) {
+    User.findById(req.payload.id).then(function (user) {
+        if (!user) { return res.sendStatus(401); }
 
-/* FAVORITES */
+        var comment = new MotorbikeComment(req.body.comment);
+        comment.motorbike = req.motorbike;
+        comment.owner = user;
 
+        return comment.save().then(function () {
+            req.motorbike.motorbikeComments === undefined ? req.motorbike.motorbikeComments = [] : req.motorbike.motorbikeComments = req.motorbike.motorbikeComments.concat(comment);
+
+            return req.motorbike.save().then(function (motorbike) {
+                res.json({ comment: comment.toJSONFor(user) });
+            });
+        });
+    }).catch(next);
+});
+
+/* Elimina el comentario de una moto */
+router.delete('/:motorbike/comments/:comment', auth.required, function (req, res, next) {
+    if (req.comment.author.toString() === req.payload.id.toString()) {
+        req.article.comments.remove(req.comment._id);
+        req.article.save()
+            .then(Comment.find({ _id: req.comment._id }).remove().exec())
+            .then(function () {
+                res.sendStatus(204);
+            });
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 module.exports = router;

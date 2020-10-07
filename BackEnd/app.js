@@ -47,6 +47,7 @@ require('./models/Article');
 require('./models/Car');
 require('./models/Motorbike');
 require('./models/Comment');
+require('./models/MotorbikeComment');
 require('./config/passport');
 
 app.use(passport.initialize());
