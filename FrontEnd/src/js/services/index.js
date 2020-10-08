@@ -27,6 +27,9 @@ servicesModule.service('Motorbikes', MotorbikeService);
 import TagsService from './tags.service';
 servicesModule.service('Tags', TagsService);
 
+import MotorbikeComments from './motorbikeComments.service';
+servicesModule.service('MotorbikeComments', MotorbikeComments);
+
 import Toastr from "./toastr.service";
 servicesModule.service('Toastr', Toastr);
 

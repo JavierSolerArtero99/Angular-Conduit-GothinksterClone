@@ -23,6 +23,10 @@ export default class Motorbikes {
         });
     }
 
+    /**
+     * Obtiene el motorbike del slug pasado por parametro
+     * @param {*} slug id de la motorbike
+     */
     getMotorbike(slug) {
         let deferred = this._$q.defer();
 
@@ -35,16 +39,26 @@ export default class Motorbikes {
             url: this._AppConstants.api + '/motorbikes/' + slug,
             method: 'GET'
         }).then(
-            (res) =>deferred.resolve(res.data.motorbike),
+            (res) => deferred.resolve(res.data.motorbike),
             (err) => deferred.reject(err)
         );
 
         return deferred.promise;
     }
 
-    // ..........................................................................................................................................
+    favorite(slug) {
+        return this._$http({
+            url: this._AppConstants.api + '/motorbikes/' + slug + '/favorite',
+            method: 'POST'
+        })
+    }
 
-    // --------------------------peticiones a la base de datos de articulos--------------------------
+    unfavorite(slug) {
+        return this._$http({
+            url: this._AppConstants.api + '/motorbikes/' + slug + '/favorite',
+            method: 'DELETE'
+        })
+    }
 
     destroy(slug) {
         return this._$http({

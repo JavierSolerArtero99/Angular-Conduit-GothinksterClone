@@ -149,15 +149,11 @@ router.delete('/:motorbike', auth.required, function (req, res, next) {
 router.post('/:motorbike/favorite', auth.required, function (req, res, next) {
     var motorbikeId = req.motorbike._id;
 
-    console.log("==============================MotorbikeID==============================");
-    console.log(req.motorbike._id);
-
     User.findById(req.payload.id).then(function (user) {
         if (!user) { return res.sendStatus(401); }
 
         return user.favoriteMotorbikes(motorbikeId).then(function () {
             return req.motorbike.updateFavoriteCount().then(function (motorbike) {
-                console.log("=================\nSEGUNDO PASO COMPLETADO\n=================")
                 return res.json({ motorbike: motorbike.toJSONFor(user) });
             });
         });

@@ -1,11 +1,10 @@
 class FavoriteBtnCtrl {
-  constructor(User, Articles, $state) {
+  constructor(User, Motorbikes, $state) {
     'ngInject';
 
     this._User = User;
-    this._Articles = Articles;
+    this._Motorbike = Motorbikes;
     this._$state = $state;
-
   }
 
   submit() {
@@ -16,32 +15,32 @@ class FavoriteBtnCtrl {
       return;
     }
 
-    if (this.article.favorited) {
-      this._Articles.unfavorite(this.article.slug).then(
+    console.log(this.motorbike)
+
+    if (this.motorbike.favorited) {
+      this._Motorbike.unfavorite(this.motorbike.slug).then(
         () => {
           this.isSubmitting = false;
-          this.article.favorited = false;
-          this.article.favoritesCount--;
+          this.motorbike.favorited = false;
+          this.motorbike.favoritesCount--;
         }
       )
 
     } else {
-      this._Articles.favorite(this.article.slug).then(
+      this._Motorbike.favorite(this.motorbike.slug).then(
         () => {
           this.isSubmitting = false;
-          this.article.favorited = true;
-          this.article.favoritesCount++;
+          this.motorbike.favorited = true;
+          this.motorbike.favoritesCount++;
         }
       )
     }
-
   }
-
 }
 
-let FavoriteBtn= {
+let FavoriteBtn = {
   bindings: {
-    article: '='
+    motorbike: '='
   },
   transclude: true,
   controller: FavoriteBtnCtrl,

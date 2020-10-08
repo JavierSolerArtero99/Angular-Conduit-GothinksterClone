@@ -1,7 +1,8 @@
 <div class="article-preview" style="margin-left: 30px;">
-    <h1 ng-bind="'Details of: ' + $ctrl.motorbike.name"></h2>
-    <p ng-bind="'CV: ' + $ctrl.motorbike.cv"></p>
-    <p ng-bind="'Color of the motorbike: ' + $ctrl.motorbike.color"></p>
-    <p ng-bind="'Owner: ' + $ctrl.motorbike.owner.username"></p>
-    <p>fgigjl</p>
+    <h1 ng-bind="'Details of: ' + $ctrl.motorbike.name">
+        </h2>
+        <p ng-bind="'CV: ' + $ctrl.motorbike.cv"></p>
+        <p ng-bind="'Color of the motorbike: ' + $ctrl.motorbike.color"></p>
+        <p ng-bind="'Owner: ' + $ctrl.motorbike.owner.username"></p>
+        <favorite-btn motorbike="$ctrl.motorbike" {{$ctrl.motorbike.favoritesCount}}></favorite-btn>
 </div>
