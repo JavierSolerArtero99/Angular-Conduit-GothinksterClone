@@ -29,6 +29,9 @@ componentsModule.component('listPagination', ListPagination);
 import MotorbikeList from './motorbike-helper/motorbike-list.component';
 componentsModule.component('motorbikeList', MotorbikeList);
 
+import MotorbikePreview from './motorbike-helper/motorbike-preview';
+componentsModule.component('motorbikePreview', MotorbikePreview);
+
 import MotorbikeDetails from './motorbike-helper/motorbike-details.component';
 componentsModule.component('motorbikeDetails', MotorbikeDetails);
 

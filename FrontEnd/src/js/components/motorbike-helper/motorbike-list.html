@@ -1,13 +1,1 @@
-<div class="article-preview" ng-repeat="motorbike in $ctrl.motorbikes" style="margin-left: 50px;">
-    <h2>&nbsp;{{motorbike.name}}</h2>
-    <p>&nbsp; CV: {{motorbike.cv}}</p>
-    <p>&nbsp; Color: {{motorbike.color}}</p>
-    <p>&nbsp; Owner: {{motorbike.owner.username}}</p>
-    <button ng-click="openDetails()" style="color: #5cb85c;
-        background-color: transparent;
-        border-color: #5cb85c;
-        border-radius: 20px;
-        padding-top: 10px;">
-        View Details
-    </button>
-</div>
+<motorbike-preview ng-repeat="motorbike in $ctrl.motorbikes" motorbike="motorbike"></motorbike-preview>

@@ -1,5 +1,3 @@
-import { log } from "gulp-util";
-
 function MotorbikeConfig($stateProvider) {
   'ngInject';
 
