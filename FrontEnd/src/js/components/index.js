@@ -32,6 +32,9 @@ componentsModule.component('motorbikeList', MotorbikeList);
 import MotorbikePreview from './motorbike-helper/motorbike-preview';
 componentsModule.component('motorbikePreview', MotorbikePreview);
 
+import MotorbikeActions from './motorbike-helper/motorbike-action.component';
+componentsModule.component('motorbikeActions', MotorbikeActions);
+
 import MotorbikeDetails from './motorbike-helper/motorbike-details.component';
 componentsModule.component('motorbikeDetails', MotorbikeDetails);
 

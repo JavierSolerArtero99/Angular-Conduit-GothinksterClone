@@ -1,9 +1,18 @@
-<div class="article-preview" style="margin-left: 50px;"  ui-sref="app.motorbikeDetails({id: $ctrl.motorbike.slug})">
-    <h2>&nbsp;{{$ctrl.motorbike.name}}</h2>
-    <h2>&nbsp;{{$ctrl.motorbike.slug}}</h2>
-    <p>&nbsp; CV: {{$ctrl.motorbike.cv}}</p>
-    <p>&nbsp; Color: {{$ctrl.motorbike.color}}</p>
-    <p>&nbsp; Owner: {{$ctrl.motorbike.owner.username}}</p>
-    <favorite-btn motorbike="$ctrl.motorbike"></favorite-btn>
-    <!-- boton de favoritos -->
+<div class="article-preview" style="margin-left: 50px;">
+
+    <article-meta article="$ctrl.motorbike">
+        <favorite-btn motorbike="$ctrl.motorbike">{{$ctrl.motorbike.favoritesCount}}</favorite-btn>
+    </article-meta>
+
+    <div ui-sref="app.motorbikeDetails({id: $ctrl.motorbike.slug})">
+        <h2>&nbsp;{{$ctrl.motorbike.name}}</h2>
+        <p>&nbsp; CV: {{$ctrl.motorbike.cv}}</p>
+        <p>&nbsp; Color: {{$ctrl.motorbike.color}}</p>
+        <p>&nbsp; Owner: {{$ctrl.motorbike.owner.username}}</p>
+        <li class="tag-default tag-pill tag-outline">
+            {{$ctrl.motorbike.cv}}
+        </li>
+    </div>
+    <div>
+    </div>
 </div>
