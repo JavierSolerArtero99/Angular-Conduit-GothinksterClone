@@ -1,1 +1,15 @@
-<p>rrrrrrrrrrrrrrrrrrrrrr</p>
+<div style="background-color: black; padding: 20px; margin-bottom: 20px; margin-right: 30px;">
+
+    <h1 style="color: blanchedalmond;" ng-bind="$ctrl.motorbike.name"></h1>
+
+    <article-meta article="$ctrl.motorbike">
+        <span ng-hide="$ctrl.canModify">
+            <favorite-btn motorbike="$ctrl.motorbike">{{$ctrl.motorbike.favoritesCount}}</favorite-btn>
+            <follow-btn user="$ctrl.motorbike.owner"></follow-btn>
+        </span>
+        <span ng-show="$ctrl.canModify">
+            <button class="btn btn-sm btn-outline-danger">Delete Motorbike</button>
+            <a class="btn btn-sm btn-outline-secondary" ui-sref="app.editor({slug: $ctrl.motorbike.slug})">Edit Motorbike</a>
+        </span>
+    </article-meta>
+</div>

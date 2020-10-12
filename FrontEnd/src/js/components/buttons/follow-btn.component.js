@@ -2,6 +2,8 @@ class FollowBtnCtrl {
   constructor(Profile, User, $state) {
     'ngInject';
 
+    console.log(User)
+
     this._Profile = Profile;
     this._User = User;
 
@@ -25,7 +27,7 @@ class FollowBtnCtrl {
         }
       )
 
-    // Otherwise, follow them
+      // Otherwise, follow them
     } else {
       this._Profile.follow(this.user.username).then(
         () => {
@@ -39,7 +41,7 @@ class FollowBtnCtrl {
   }
 }
 
-let FollowBtn= {
+let FollowBtn = {
   bindings: {
     user: '='
   },
