@@ -92,8 +92,6 @@ router.post('/users/', function (req, res, next) {
 
 /* FOLLOW */
 
-
-
 /****LOGIN WITH SOCIAL CREDENTIALS****/
 
 router.post('/users/sociallogin', function (req, res, next) {

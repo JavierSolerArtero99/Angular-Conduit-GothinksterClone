@@ -1,52 +1,34 @@
 class EditorCtrl {
-  constructor(Articles, article, $state) {
+  constructor(Motorbikes, motorbike, $state) {
     'ngInject';
-
-    this._Articles = Articles;
+    this._Motorbikes = Motorbikes;
     this._$state = $state;
 
-    if (!article) {
-      this.article = {
-        title: '',
-        description: '',
-        body: '',
-        tagList: []
+    if (!motorbike) {
+      this.motorbike = {
+        name: '',
+        cv: '',
+        color: '',
       }
     } else {
-      this.article = article;
+      this.motorbike = motorbike;
     }
-
-  }
-
-  addTag() {
-    if (!this.article.tagList.includes(this.tagField)) {
-      this.article.tagList.push(this.tagField);
-      this.tagField = '';
-    }
-  }
-
-  removeTag(tagName) {
-    this.article.tagList = this.article.tagList.filter((slug) => slug != tagName);
   }
 
   submit() {
     this.isSubmitting = true;
 
-    this._Articles.save(this.article).then(
-      (newArticle) => {
-        this._$state.go('app.article', { slug: newArticle.slug });
+    this._Motorbikes.save(this.motorbike).then(
+      (newMotorbike) => {
+        this._$state.go('app.motorbike', { slug: newMotorbike.slug });
       },
 
       (err) => {
         this.isSubmitting = false;
         this.errors = err.data.errors;
       }
-
     )
   }
-
-
-
 }
 
 

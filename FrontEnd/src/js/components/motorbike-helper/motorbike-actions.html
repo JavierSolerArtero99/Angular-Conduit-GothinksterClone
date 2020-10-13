@@ -8,7 +8,7 @@
             <follow-btn user="$ctrl.motorbike.owner"></follow-btn>
         </span>
         <span ng-show="$ctrl.canModify">
-            <button class="btn btn-sm btn-outline-danger">Delete Motorbike</button>
+            <button class="btn btn-sm btn-outline-danger" ng-click="$ctrl.deleteMotorbike()">Delete Motorbike</button>
             <a class="btn btn-sm btn-outline-secondary" ui-sref="app.editor({slug: $ctrl.motorbike.slug})">Edit Motorbike</a>
         </span>
     </article-meta>

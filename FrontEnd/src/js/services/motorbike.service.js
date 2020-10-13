@@ -62,26 +62,26 @@ export default class Motorbikes {
 
     destroy(slug) {
         return this._$http({
-            url: this._AppConstants.api + '/articles/' + slug,
+            url: this._AppConstants.api + '/motorbikes/' + slug,
             method: 'DELETE'
         })
     }
 
-    save(article) {
+    save(motorbike) {
         let request = {};
 
-        if (article.slug) {
-            request.url = `${this._AppConstants.api}/articles/${article.slug}`;
+        if (motorbike.slug) {
+            request.url = `${this._AppConstants.api}/motorbikes/${motorbike.slug}`;
             request.method = 'PUT';
-            delete article.slug;
+            delete motorbike.slug;
 
         } else {
-            request.url = `${this._AppConstants.api}/articles`;
+            request.url = `${this._AppConstants.api}/motorbikes`;
             request.method = 'POST';
         }
 
-        request.data = { article: article };
+        request.data = { motorbike: motorbike };
 
-        return this._$http(request).then((res) => res.data.article);
+        return this._$http(request).then((res) => res.data.motorbike);
     }
 }

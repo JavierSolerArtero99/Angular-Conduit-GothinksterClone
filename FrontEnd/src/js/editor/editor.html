@@ -9,45 +9,22 @@
           <fieldset ng-disabled="$ctrl.isSubmitting">
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                ng-model="$ctrl.article.title"
-                type="text"
-                placeholder="Article Title" />
+              <input class="form-control form-control-lg" ng-model="$ctrl.motorbike.name" type="text"
+                placeholder="Motorbike Name" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control"
-                ng-model="$ctrl.article.description"
-                type="text"
-                placeholder="What's this article about?" />
+              <input class="form-control" ng-model="$ctrl.motorbike.cv" type="text"
+                placeholder="CV" />
             </fieldset>
 
             <fieldset class="form-group">
-              <textarea class="form-control"
-                rows="8"
-                ng-model="$ctrl.article.body"
-                placeholder="Write your article (in markdown)">
-              </textarea>
-            </fieldset>
-
-            <fieldset class="form-group">
-              <input class="form-control"
-                type="text"
-                placeholder="Enter tags"
-                ng-model="$ctrl.tagField"
-                ng-keyup="$event.keyCode == 13 && $ctrl.addTag()" />
-
-              <div class="tag-list">
-                <span ng-repeat="tag in $ctrl.article.tagList"
-                  class="tag-default tag-pill">
-                  <i class="ion-close-round" ng-click="$ctrl.removeTag(tag)"></i>
-                  {{ tag }}
-                </span>
-              </div>
+              <input class="form-control" ng-model="$ctrl.motorbike.color" type="text"
+                placeholder="Color" />
             </fieldset>
 
             <button class="btn btn-lg pull-xs-right btn-primary" type="button" ng-click="$ctrl.submit()">
-              Publish Article
+              Publish Motorbike
             </button>
 
           </fieldset>
