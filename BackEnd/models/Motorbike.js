@@ -42,8 +42,9 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
 };
 
 MotorbikeSchema.methods.toJSONFor = function (user) {
-  console.log("============================Es favorito?????????????????????????????????????????");
-  console.log(user.isFavoriteMotorbike(this._id))
+  console.log("imprimir los comentarios");
+
+
   return {
     slug: this.slug,
     name: this.name,
@@ -53,6 +54,7 @@ MotorbikeSchema.methods.toJSONFor = function (user) {
     updatedAt: this.updatedAt,
     favorited: user ? user.isFavoriteMotorbike(this._id) : false,
     favoritesCount: this.favoritesCount,
+    motorbikeComments: this.motorbikeComments,
     owner: this.owner.toProfileJSONFor(user)
   };
 };
