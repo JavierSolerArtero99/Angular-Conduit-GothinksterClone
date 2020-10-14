@@ -34,7 +34,7 @@
           <a ui-sref="app.login">Sign in</a> or <a ui-sref="app.register">sign up</a> to add comments on this motorbike.
         </div>
 
-        <comment ng-repeat="cmt in $ctrl.comments"
+        <comment ng-repeat="cmt in $ctrl.motorbikeComments"
           data="cmt"
           delete-cb="$ctrl.deleteComment(cmt.id, $index)">
         </comment>

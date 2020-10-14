@@ -1,14 +1,17 @@
 class MotorbikesDetailCtrl {
-  constructor(Motorbikes, $state) {
+  constructor(MotorbikeComments, $state) {
     'ngInject';
+
+    this._MotorbikeComments = MotorbikeComments;
   }
 
   $onInit() {
-    console.log(this.motorbike);
+     this._MotorbikeComments.getAll(this.motorbike.slug)
+      .then((data) => {
+        this.motorbikeComments = data;
+      })
+      .catch((error) => console.log("No se han podido acceder a los commentarios de las motos"))
   }
-
-
-  
 }
 
 let MotorbikesDetail = {

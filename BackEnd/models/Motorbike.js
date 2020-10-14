@@ -42,9 +42,6 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
 };
 
 MotorbikeSchema.methods.toJSONFor = function (user) {
-  console.log("imprimir los comentarios");
-
-
   return {
     slug: this.slug,
     name: this.name,

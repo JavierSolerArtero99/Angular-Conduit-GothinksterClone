@@ -162,17 +162,17 @@ router.post('/:motorbike/favorite', auth.required, function (req, res, next) {
 
 // Unfavorite an article
 router.delete('/:motorbike/favorite', auth.required, function (req, res, next) {
-  var motorbikeId = req.motorbike._id;
+    var motorbikeId = req.motorbike._id;
 
-  User.findById(req.payload.id).then(function (user) {
-    if (!user) { return res.sendStatus(401); }
+    User.findById(req.payload.id).then(function (user) {
+        if (!user) { return res.sendStatus(401); }
 
-    return user.unfavoriteMotorbike(motorbikeId).then(function () {
-      return req.motorbike.updateFavoriteCount().then(function (motorbike) {
-        return res.json({ motorbike: motorbike.toJSONFor(user) });
-      });
-    });
-  }).catch(next);
+        return user.unfavoriteMotorbike(motorbikeId).then(function () {
+            return req.motorbike.updateFavoriteCount().then(function (motorbike) {
+                return res.json({ motorbike: motorbike.toJSONFor(user) });
+            });
+        });
+    }).catch(next);
 });
 
 /* COMMENTS */

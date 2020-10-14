@@ -20,7 +20,7 @@ export default class MotorbikeComments {
         return this._$http({
             url: `${this._AppConstants.api}/motorbikes/${slug}/comments`,
             method: 'GET',
-        }).then((res) => res.data.comments);
+        }).then((res) =>res.data.motorbikeComments);
 
     }
 
