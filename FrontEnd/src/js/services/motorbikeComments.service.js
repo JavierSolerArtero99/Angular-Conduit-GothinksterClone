@@ -21,7 +21,6 @@ export default class MotorbikeComments {
             url: `${this._AppConstants.api}/motorbikes/${slug}/comments`,
             method: 'GET',
         }).then((res) =>res.data.motorbikeComments);
-
     }
 
     destroy(commentId, motorbikeSlug) {

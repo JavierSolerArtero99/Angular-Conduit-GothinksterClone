@@ -22,7 +22,7 @@
               </div>
               <div class="card-footer">
                 <img ng-src="{{::$ctrl.currentUser.image}}" class="comment-author-img" />
-                <button class="btn btn-sm btn-primary" type="submit">
+                <button class="btn btn-sm btn-primary" type="submit" ng-click="$ctrl.addMotorbikeComment()">
                  Post Comment
                 </button>
               </div>
@@ -35,6 +35,7 @@
         </div>
 
         <comment ng-repeat="cmt in $ctrl.motorbikeComments"
+          motorbike="$ctrl.motorbike"
           data="cmt"
           delete-cb="$ctrl.deleteComment(cmt.id, $index)">
         </comment>
