@@ -1,9 +1,10 @@
 class MotorbikesDetailCtrl {
-  constructor(MotorbikeComments, $state, Toastr) {
+  constructor(User, MotorbikeComments, $state, Toastr) {
     'ngInject';
 
     this._MotorbikeComments = MotorbikeComments;
     this._Toastr = Toastr;
+    this._User = User;
   }
 
   $onInit() {
@@ -12,6 +13,8 @@ class MotorbikesDetailCtrl {
         this.motorbikeComments = data;
       })
       .catch((error) => console.log("No se han podido acceder a los commentarios de las motos"))
+
+    this.user = this._User.current
   }
 
   addMotorbikeComment() {
