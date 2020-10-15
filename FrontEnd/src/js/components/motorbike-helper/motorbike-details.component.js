@@ -1,8 +1,9 @@
 class MotorbikesDetailCtrl {
-  constructor(MotorbikeComments, $state) {
+  constructor(MotorbikeComments, $state, Toastr) {
     'ngInject';
 
     this._MotorbikeComments = MotorbikeComments;
+    this._Toastr = Toastr;
   }
 
   $onInit() {
@@ -14,11 +15,25 @@ class MotorbikesDetailCtrl {
   }
 
   addMotorbikeComment() {
-    if (this.commentForm) {
+    if (this.commentForm.body) {
       this._MotorbikeComments.add(this.motorbike.slug, this.commentForm.body)
-        .then((data) => this.motorbikeComments.unshift(data))
+        .then((data) => {
+          this.commentForm.body = undefined;
+          this.motorbikeComments.unshift(data)
+        })
         .catch((error) => { console.log(error); })
     }
+  }
+
+  deleteCommentParent(cmt, index) {
+    this._MotorbikeComments.destroy(cmt.id, this.motorbike.slug)
+      .then((data) => {
+        this._Toastr.showToastr('success', 'Se ha eliminado el comentario correctamente');
+        console.log(this.motorbikeComments.splice(index, 1));
+      })
+      .catch((error) => {
+        this._Toastr.showToastr('error', 'No se ha podido eliminar el comentario');
+      })
   }
 }
 

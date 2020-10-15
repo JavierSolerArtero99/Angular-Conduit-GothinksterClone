@@ -7,7 +7,6 @@ class MotorbikeActionsCtrl {
     this.User = User.current;
     this._toastr = Toastr;
     this._Motorbikes = Motorbikes;
-    console.log(this._Motorbikes);
   }
 
   $onInit() {

@@ -35,9 +35,9 @@
         </div>
 
         <comment ng-repeat="cmt in $ctrl.motorbikeComments"
+          delete-comment-parent="$ctrl.deleteCommentParent(cmt, $index)"
           motorbike="$ctrl.motorbike"
-          data="cmt"
-          delete-cb="$ctrl.deleteComment(cmt.id, $index)">
+          data="cmt">
         </comment>
 
 

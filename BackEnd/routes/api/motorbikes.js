@@ -229,6 +229,11 @@ router.delete('/:motorbike/comments/:comment', auth.required, function (req, res
     MotorbikeComment.find({ _id: req.params.comment}).remove().exec()
         .then((data) => res.json(data))
         .catch((error) => res.sendStatus(403))
+    // Motorbike.findOne({ slug: req.params.motorbike })
+    //     .then((data) => {
+    //         console.log(data.motorbikeComments)
+    //     })
+    //     .catch((error) => console.log(error))
 });
 
 module.exports = router;
