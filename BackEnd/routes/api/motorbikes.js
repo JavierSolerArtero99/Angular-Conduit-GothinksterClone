@@ -105,6 +105,21 @@ router.get('/:motorbike', auth.optional, function (req, res, next) {
 
 /* Modifica una  moto */
 router.put('/:motorbike', auth.required, function (req, res, next) {
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
+    console.log("gggggggggggggggggggggggggg");
     User.findById(req.payload.id).then(function (user) {
         if (req.motorbike.owner._id.toString() === req.payload.id.toString()) {
 
@@ -118,6 +133,10 @@ router.put('/:motorbike', auth.required, function (req, res, next) {
 
             if (typeof req.body.motorbike.color !== 'undefined') {
                 req.motorbike.color = req.body.motorbike.color;
+            }
+
+            if (req.body.motorbike.motorbikeTags.length !== req.motorbike.motorbikeTags.length) {
+                req.motorbike.motorbikeTags = req.body.motorbike.motorbikeTags;                
             }
 
             req.motorbike.save().then(function (motorbike) {
@@ -179,11 +198,7 @@ router.delete('/:motorbike/favorite', auth.required, function (req, res, next) {
 
 /* Obtiene los comentarios de una moto */
 router.get('/:motorbike/comments', auth.optional, function (req, res, next) {
-    console.log("comentario")
-    console.log(req.motorbike);
     Promise.resolve(req.payload ? User.findById(req.payload.id) : null).then(function (user) {
-        console.log("USEEEEEEEEEER")
-        console.log(user)
         return req.motorbike.populate({
             path: 'motorbikeComments',
             populate: {
@@ -195,7 +210,6 @@ router.get('/:motorbike/comments', auth.optional, function (req, res, next) {
                 }
             }
         }).execPopulate().then(function (motorbike) {
-            console.log(req.motorbike.motorbikeComments)
             return res.json({
                 motorbikeComments: req.motorbike.motorbikeComments.map(function (comment) {
                     return comment.toJSONFor(user);
@@ -226,7 +240,7 @@ router.post('/:motorbike/comments', auth.required, function (req, res, next) {
 
 /* Elimina el comentario de una moto */
 router.delete('/:motorbike/comments/:comment', auth.required, function (req, res, next) {
-    MotorbikeComment.find({ _id: req.params.comment}).remove().exec()
+    MotorbikeComment.find({ _id: req.params.comment }).remove().exec()
         .then((data) => res.json(data))
         .catch((error) => res.sendStatus(403))
     // Motorbike.findOne({ slug: req.params.motorbike })

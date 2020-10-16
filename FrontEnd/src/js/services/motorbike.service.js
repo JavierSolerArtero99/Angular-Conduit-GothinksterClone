@@ -69,6 +69,8 @@ export default class Motorbikes {
 
     save(motorbike) {
         let request = {};
+        console.log("GUARDANDO....");
+        console.log(motorbike);
 
         if (motorbike.slug) {
             request.url = `${this._AppConstants.api}/motorbikes/${motorbike.slug}`;

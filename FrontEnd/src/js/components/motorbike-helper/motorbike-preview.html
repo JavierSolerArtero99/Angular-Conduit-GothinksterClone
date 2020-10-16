@@ -9,8 +9,8 @@
         <p>&nbsp; CV: {{$ctrl.motorbike.cv}}</p>
         <p>&nbsp; Color: {{$ctrl.motorbike.color}}</p>
         <p>&nbsp; Owner: {{$ctrl.motorbike.owner.username}}</p>
-        <li class="tag-default tag-pill tag-outline">
-            {{$ctrl.motorbike.cv}}
+        <li class="tag-default tag-pill tag-outline" ng-repeat="tag in $ctrl.motorbike.motorbikeTags">
+            {{tag}}
         </li>
     </div>
     <div>

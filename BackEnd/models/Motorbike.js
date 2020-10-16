@@ -10,6 +10,7 @@ var MotorbikeSchema = new mongoose.Schema({
   color: String,
   favoritesCount: { type: Number, default: 0 },
   motorbikeComments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MotorbikeComment' }],
+  motorbikeTags: [{ type: String }],
   owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });
 
@@ -42,6 +43,7 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
 };
 
 MotorbikeSchema.methods.toJSONFor = function (user) {
+  console.log(this);
   return {
     slug: this.slug,
     name: this.name,
@@ -52,6 +54,7 @@ MotorbikeSchema.methods.toJSONFor = function (user) {
     favorited: user ? user.isFavoriteMotorbike(this._id) : false,
     favoritesCount: this.favoritesCount,
     motorbikeComments: this.motorbikeComments,
+    motorbikeTags: this.motorbikeTags,
     owner: this.owner.toProfileJSONFor(user)
   };
 };
