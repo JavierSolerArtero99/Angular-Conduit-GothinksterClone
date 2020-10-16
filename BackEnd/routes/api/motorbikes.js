@@ -42,11 +42,15 @@ router.get('/', auth.optional, function (req, res, next) {
 
     Promise.all([
         req.query.owner ? User.findOne({ username: req.query.owner }) : null,
+        req.query.favorited ? User.findOne({ username: req.query.favorited }) : null,
     ]).then(function (results) {
         var owner = results[0];
+        var favorited = results[1]
 
         if (owner) {
             query.owner = owner._id;
+        } else if (req.query.favorited) {
+            query._id = { $in: [] };
         }
 
         return Promise.all([
