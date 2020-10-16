@@ -43,7 +43,6 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
 };
 
 MotorbikeSchema.methods.toJSONFor = function (user) {
-  console.log(this);
   return {
     slug: this.slug,
     name: this.name,

@@ -19,6 +19,7 @@ router.param('motorbike', function (req, res, next, slug) {
         }).catch(next);
 });
 
+
 /* CRUD */
 
 /* Obtiene todas las motos */
@@ -91,6 +92,50 @@ router.post('/', auth.required, function (req, res, next) {
     }).catch(next);
 });
 
+/* USER FEED */
+
+/* Obtiene la feed de un usuario */
+router.get('/feed', auth.required, function (req, res, next) {
+    var limit = 20;
+    var offset = 0;
+
+    console.log("======================");
+    console.log("======================");
+    console.log("======================");
+    console.log("======================");
+
+    if (typeof limit !== 'undefined') {
+        limit = req.query.limit;
+    }
+
+    if (typeof offset !== 'undefined') {
+        offset = req.query.offset;
+    }
+
+    User.findById(req.payload.id).then(function (user) {
+        if (!user) { return res.sendStatus(401) }
+        Promise.all([
+            Motorbike.find({ owner: { $in: user.following } })
+                .limit(Number(limit))
+                .skip(Number(offset))
+                .populate('owner')
+                .exec(),
+            Motorbike.count({ owner: { $in: user.following } })
+        ]).then(function (results) {
+            var motorbikes = results[0];
+            var motorbikesCounts = results[1];
+
+            return res.json({
+                motorbike: motorbikes.map(function (motorbike) {
+                    return motorbike.toJSONFor(user);
+                }),
+                motorbikesCounts: motorbikesCounts
+            });
+        }).catch(next);
+    });
+
+})
+
 /* Obtiene una moto */
 router.get('/:motorbike', auth.optional, function (req, res, next) {
     Promise.all([
@@ -105,21 +150,6 @@ router.get('/:motorbike', auth.optional, function (req, res, next) {
 
 /* Modifica una  moto */
 router.put('/:motorbike', auth.required, function (req, res, next) {
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
-    console.log("gggggggggggggggggggggggggg");
     User.findById(req.payload.id).then(function (user) {
         if (req.motorbike.owner._id.toString() === req.payload.id.toString()) {
 
@@ -136,7 +166,7 @@ router.put('/:motorbike', auth.required, function (req, res, next) {
             }
 
             if (req.body.motorbike.motorbikeTags.length !== req.motorbike.motorbikeTags.length) {
-                req.motorbike.motorbikeTags = req.body.motorbike.motorbikeTags;                
+                req.motorbike.motorbikeTags = req.body.motorbike.motorbikeTags;
             }
 
             req.motorbike.save().then(function (motorbike) {
@@ -162,6 +192,7 @@ router.delete('/:motorbike', auth.required, function (req, res, next) {
         }
     }).catch(next);
 });
+
 
 /* FAVORITES */
 
@@ -193,6 +224,7 @@ router.delete('/:motorbike/favorite', auth.required, function (req, res, next) {
         });
     }).catch(next);
 });
+
 
 /* COMMENTS */
 
@@ -249,5 +281,6 @@ router.delete('/:motorbike/comments/:comment', auth.required, function (req, res
     //     })
     //     .catch((error) => console.log(error))
 });
+
 
 module.exports = router;

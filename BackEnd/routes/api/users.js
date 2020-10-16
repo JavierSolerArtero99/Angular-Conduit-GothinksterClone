@@ -53,17 +53,12 @@ router.post('/users/login', function (req, res, next) {
     'local',
     { session: false },
     function (err, user, info) {
-      console.log("=====================================================================")
-      console.log(user)
       if (err) { return next(err); }
 
       if (user) {
-        console.log("ENTRA AL USER")
-        console.log(user)
         user.token = user.generateJWT();
         return res.json({ user: user.toAuthJSON() });
       } else {
-        console.log("USEEEEEEEEEEERRRRRRRRR")
         return res.status(422).json(info);
       }
     })(req, res, next);
@@ -72,7 +67,6 @@ router.post('/users/login', function (req, res, next) {
 router.post('/users/', function (req, res, next) {
   User.find({ $or: [{ email: req.body.user.email }, { username: req.body.user.username }] })
     .then(function (user) {
-      console.log(`USER: ${user}`)
       if (user[0]) {
         return res.status(422).json("The email or username is already created");
       } else {
@@ -88,7 +82,6 @@ router.post('/users/', function (req, res, next) {
       }
     });
 })
-
 
 /* FOLLOW */
 
@@ -110,7 +103,6 @@ router.post('/users/sociallogin', function (req, res, next) {
       return done(err);
 
     if (user) {
-      console.log(user);
       user.token = user.generateJWT();
       return res.json({ user: user.toAuthJSON() });
     } else {

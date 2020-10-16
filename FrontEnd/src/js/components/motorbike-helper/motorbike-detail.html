@@ -4,7 +4,9 @@
   </motorbike-actions>
 
   <h2 ng-bind="$ctrl.motorbike.name"></h2>
-  <p class="tag-default tag-pill tag-outline" ng-bind="$ctrl.motorbike.cv"></p>
+  <li class="tag-default tag-pill tag-outline" ng-repeat="tag in $ctrl.motorbike.motorbikeTags">
+    {{tag}}
+  </li>
 
   <!-- Comments -->
   <div class="row">
