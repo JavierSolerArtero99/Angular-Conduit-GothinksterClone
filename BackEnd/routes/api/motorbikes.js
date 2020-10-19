@@ -103,11 +103,6 @@ router.get('/feed', auth.required, function (req, res, next) {
     var limit = 20;
     var offset = 0;
 
-    console.log("======================");
-    console.log("======================");
-    console.log("======================");
-    console.log("======================");
-
     if (typeof limit !== 'undefined') {
         limit = req.query.limit;
     }

@@ -1,12 +1,12 @@
 class HomeCtrl {
-  constructor(User, Tags, AppConstants, $scope) {
+  constructor(User, MotorbikeTags, AppConstants, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
     this._$scope = $scope;
 
     // Get list of all tags
-    Tags
+    MotorbikeTags
       .getAll()
       .then(
         (tags) => {

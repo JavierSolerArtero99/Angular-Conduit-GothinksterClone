@@ -24,6 +24,9 @@ servicesModule.service('Cars', CarService);
 import MotorbikeService from './motorbike.service';
 servicesModule.service('Motorbikes', MotorbikeService);
 
+import MotorbikeTags from './motorbikeTags.service';
+servicesModule.service('MotorbikeTags', MotorbikeTags);
+
 import TagsService from './tags.service';
 servicesModule.service('Tags', TagsService);
 
