@@ -37,7 +37,7 @@ router.get('/', auth.optional, function (req, res, next) {
     }
 
     if (typeof req.query.tag !== 'undefined') {
-        query.tagList = { "$in": [req.query.tag] };
+        query.motorbikeTags = { "$in": [req.query.tag] };
     }
 
     Promise.all([
@@ -53,6 +53,10 @@ router.get('/', auth.optional, function (req, res, next) {
 
         if (req.query.favoritesMotorbikes) {
             req.query.favoritesMotorbikes ? query._id = { $in: favorited.favoritesMotorbikes } : query._id = { $in: [] };
+        }
+
+        if (req.query.tag) {
+            query.motorbikeTags = req.query.tag;
         }
 
         return Promise.all([

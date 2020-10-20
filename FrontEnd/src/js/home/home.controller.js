@@ -24,9 +24,6 @@ class HomeCtrl {
 
   changeList(newList) {
     this._$scope.$broadcast('setListTo', newList);
-    console.log(newList);
-    console.log("=======================");
-    console.log(this.motorbikes)
   }
 }
 

@@ -8,7 +8,6 @@ class MotorbikeListCtrl {
             $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
         };
         this.$onInit = function () {
-            console.log(this.listConfig);
             this.setListTo(this.listConfig);
         }
         $scope.$on('setListTo', (ev, newList) => {
@@ -35,7 +34,6 @@ class MotorbikeListCtrl {
     runQuery() {
         this.loading = true;
         this.listConfig = this.listConfig || {};
-
         let queryConfig = {
             type: this.listConfig.type || undefined,
             filters: this.listConfig.filters || {}
@@ -49,14 +47,9 @@ class MotorbikeListCtrl {
 
         queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
-        console.log("QUERY CONFIG");
-        console.log(queryConfig);
-
         this._Motorbikes
             .query(queryConfig)
             .then((res) => {
-                console.log("RESPONSE");
-                console.log(res);
                 this.loading = false;
                 (res.motorbike) ? this.motorbikes = res.motorbike : this.motorbikes = res.motorbikes;
                 this.listConfig.totalPages = Math.ceil(res.motorbikesCount / this.limit);
