@@ -88,7 +88,6 @@ UserSchema.methods.favoriteMotorbikes = function (id) {
   /****** probar con otro usuario*****/
 
   if (this.favoritesMotorbikes.indexOf(id) === -1) {
-    console.log("gggggggggggggggggggggggggggggggggggggggggg")
     this.favoritesMotorbikes = this.favoritesMotorbikes.concat(id);
   }
 
@@ -102,9 +101,6 @@ UserSchema.methods.unfavoriteMotorbike = function (id) {
 
 UserSchema.methods.isFavoriteMotorbike = function (id) {
   return this.favoritesMotorbikes.some(function (favoriteId) {
-    console.log("====================FAVORITO====================")
-    console.log("ID: " + id.toString());
-    console.log("Favorited_ID: " + favoriteId.toString());
     return favoriteId.toString() === id.toString();
   });
 };

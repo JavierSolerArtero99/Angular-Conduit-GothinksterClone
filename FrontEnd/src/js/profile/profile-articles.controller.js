@@ -25,8 +25,8 @@ class ProfileArticlesCtrl {
     Motorbikes
       .query(this.listConfig)
       .then((motorbikes) => {
-        console.log(motorbikes);
-        this.motorbikes = motorbikes.motorbike
+        console.log(motorbikes.motorbikes);
+        this.motorbikes = motorbikes.motorbikes
       })
   }
 }

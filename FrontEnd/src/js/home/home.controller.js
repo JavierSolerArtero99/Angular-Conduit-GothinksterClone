@@ -1,9 +1,10 @@
 class HomeCtrl {
-  constructor(User, MotorbikeTags, Motorbikes, AppConstants, $scope) {
+  constructor(User, MotorbikeTags, motorbikes, AppConstants, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
     this._$scope = $scope;
+    this.motorbikes = motorbikes;
 
     // Get list of all tags
     MotorbikeTags
@@ -19,18 +20,13 @@ class HomeCtrl {
     this.listConfig = {
       type: User.current ? 'feed' : 'all'
     };
-
-    Motorbikes
-      .query(this.listConfig)
-      .then((motorbikes) => {
-        this.motorbikes = motorbikes.motorbike
-      })
-
   }
 
   changeList(newList) {
     this._$scope.$broadcast('setListTo', newList);
     console.log(newList);
+    console.log("=======================");
+    console.log(this.motorbikes)
   }
 }
 

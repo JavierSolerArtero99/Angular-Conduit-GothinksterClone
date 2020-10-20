@@ -1,27 +1,23 @@
 class MotorbikeListCtrl {
-    constructor(Motorbikes, $scope, $state) {
+    constructor(Motorbikes, $scope) {
         'ngInject';
 
+        this._Motorbikes = Motorbikes;
+        this._$scope = $scope;
+        this._$scope.openDetails = function () {
+            $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
+        };
         this.$onInit = function () {
-            this._Motorbikes = Motorbikes;
-            this._$scope = $scope;
-            this._$state = $state;
-            this._$scope.openDetails = function () {
-                $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
-            };
-
             console.log(this.listConfig);
-
             this.setListTo(this.listConfig);
-
-            $scope.$on('setListTo', (ev, newList) => {
-                this.setListTo(newList);
-            });
-
-            $scope.$on('setPageTo', (ev, pageNumber) => {
-                this.setPageTo(pageNumber);
-            });
         }
+        $scope.$on('setListTo', (ev, newList) => {
+            this.setListTo(newList);
+        });
+
+        $scope.$on('setPageTo', (ev, pageNumber) => {
+            this.setPageTo(pageNumber);
+        });
 
     }
 
@@ -53,11 +49,16 @@ class MotorbikeListCtrl {
 
         queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
+        console.log("QUERY CONFIG");
+        console.log(queryConfig);
+
         this._Motorbikes
             .query(queryConfig)
             .then((res) => {
+                console.log("RESPONSE");
+                console.log(res);
                 this.loading = false;
-                this.list = res.motorbikes;
+                (res.motorbike) ? this.motorbikes = res.motorbike : this.motorbikes = res.motorbikes;
                 this.listConfig.totalPages = Math.ceil(res.motorbikesCount / this.limit);
             })
     }
@@ -65,7 +66,6 @@ class MotorbikeListCtrl {
 
 let MotorbikeList = {
     bindings: {
-        motorbikes: '=',
         limit: '=',
         listConfig: '=',
     },

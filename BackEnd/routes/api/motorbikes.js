@@ -40,10 +40,6 @@ router.get('/', auth.optional, function (req, res, next) {
         query.tagList = { "$in": [req.query.tag] };
     }
 
-    console.log("================");
-    console.log(req.query);
-    console.log("================");
-
     Promise.all([
         req.query.owner ? User.findOne({ username: req.query.owner }) : null,
         req.query.favoritesMotorbikes ? User.findOne({ username: req.query.favoritesMotorbikes }) : null,
@@ -53,8 +49,10 @@ router.get('/', auth.optional, function (req, res, next) {
 
         if (owner) {
             query.owner = owner._id;
-        } else if (req.query.favorited) {
-            query._id = { $in: [] };
+        }
+
+        if (req.query.favoritesMotorbikes) {
+            req.query.favoritesMotorbikes ? query._id = { $in: favorited.favoritesMotorbikes } : query._id = { $in: [] };
         }
 
         return Promise.all([
@@ -67,13 +65,6 @@ router.get('/', auth.optional, function (req, res, next) {
             Motorbike.count(query).exec(),
             req.payload ? User.findById(req.payload.id) : null,
         ]).then(function (results) {
-
-        console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        console.log("Motorbike results de: ");
-        console.log(req.query);
-        console.log(results);
-        console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
             var motorbikes = results[0];
             var motorbikesCount = results[1];
             var user = results[2];
@@ -90,7 +81,6 @@ router.get('/', auth.optional, function (req, res, next) {
 
 /* Postea una nueva moto */
 router.post('/', auth.required, function (req, res, next) {
-    console.log("-Se va a añadir un nuevo motorbike-")
     User.findById(req.payload.id).then(function (user) {
         if (!user) { return res.sendStatus(401); }
 
