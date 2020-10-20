@@ -40,9 +40,13 @@ router.get('/', auth.optional, function (req, res, next) {
         query.tagList = { "$in": [req.query.tag] };
     }
 
+    console.log("================");
+    console.log(req.query);
+    console.log("================");
+
     Promise.all([
         req.query.owner ? User.findOne({ username: req.query.owner }) : null,
-        req.query.favorited ? User.findOne({ username: req.query.favorited }) : null,
+        req.query.favoritesMotorbikes ? User.findOne({ username: req.query.favoritesMotorbikes }) : null,
     ]).then(function (results) {
         var owner = results[0];
         var favorited = results[1]
@@ -63,6 +67,13 @@ router.get('/', auth.optional, function (req, res, next) {
             Motorbike.count(query).exec(),
             req.payload ? User.findById(req.payload.id) : null,
         ]).then(function (results) {
+
+        console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        console.log("Motorbike results de: ");
+        console.log(req.query);
+        console.log(results);
+        console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
             var motorbikes = results[0];
             var motorbikesCount = results[1];
             var user = results[2];

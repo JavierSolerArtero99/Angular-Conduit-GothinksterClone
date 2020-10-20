@@ -1,21 +1,6 @@
 <div class="home-page">
 
   <home-slider></home-slider>
-
-  <div style="margin-top: 20px; text-align: center;">
-  <h2 style="margin-top: 15px; margin-left: 50px; margin-bottom: 20px;">Categories</h2>
-    <div ui-sref="app.motorbike"
-      style="display: inline-block; padding-top: 12px; border-radius: 20px; border-width: 5px; margin-left:  50px; background-color: #818a91; text-align: center; height: 50px; width: 100px;">
-      <p style="color: white;">Motorbikes</p>
-    </div>
-
-    <div ui-sref="app.car"
-      style="display: inline-block; padding-top: 12px; border-radius: 20px; border-width: 5px; margin-left:  50px; background-color: #818a91; text-align: center; height: 50px; width: 100px;">
-      <p style="color: white;">Cars</p>
-    </div>
-
-  </div>
-
   <!-- Splash banner that only shows when not logged in -->
   <div class="banner" show-authed="false">
     <div class="container">
@@ -60,6 +45,9 @@
 
         <!-- List the current articles -->
         <!-- <article-list limit="10" list-config="$ctrl.listConfig"></article-list> -->
+
+        <!-- List the current motorbikes -->
+        <motorbike-list motorbikes="$ctrl.motorbikes" limit="5" list-config="$ctrl.listConfig"></motorbike-list>
 
       </div>
 

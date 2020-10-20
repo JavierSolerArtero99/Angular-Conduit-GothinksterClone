@@ -1,5 +1,5 @@
 class HomeCtrl {
-  constructor(User, MotorbikeTags, AppConstants, $scope) {
+  constructor(User, MotorbikeTags, Motorbikes, AppConstants, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
@@ -20,10 +20,17 @@ class HomeCtrl {
       type: User.current ? 'feed' : 'all'
     };
 
+    Motorbikes
+      .query(this.listConfig)
+      .then((motorbikes) => {
+        this.motorbikes = motorbikes.motorbike
+      })
+
   }
 
   changeList(newList) {
     this._$scope.$broadcast('setListTo', newList);
+    console.log(newList);
   }
 }
 

@@ -1,5 +1,5 @@
 class ProfileArticlesCtrl {
-  constructor(profile, $state, $rootScope) {
+  constructor(Motorbikes, profile, $state, $rootScope) {
     'ngInject';
 
     // The profile for this page, resolved by UI Router
@@ -12,16 +12,22 @@ class ProfileArticlesCtrl {
 
     // `main` state's filter should be by author
     if (this.profileState === 'main') {
-      this.listConfig.filters = {author: this.profile.username};
+      this.listConfig.filters = { owner: this.profile.username };
       // Set page title
       $rootScope.setPageTitle('@' + this.profile.username);
 
     } else if (this.profileState === 'favorites') {
-      this.listConfig.filters = {favorited: this.profile.username};
+      this.listConfig.filters = { favoritesMotorbikes: this.profile.username };
       // Set page title
       $rootScope.setPageTitle(`Articles favorited by ${this.profile.username}`);
     }
 
+    Motorbikes
+      .query(this.listConfig)
+      .then((motorbikes) => {
+        console.log(motorbikes);
+        this.motorbikes = motorbikes.motorbike
+      })
   }
 }
 

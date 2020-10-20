@@ -11,7 +11,6 @@ export default class Articles {
 
   /*
     Config object spec:
-
     {
       type: String [REQUIRED] - Accepts "all", "feed"
       filters: Object that serves as a key => value of URL params (i.e. {author:"ericsimons"} )
@@ -70,7 +69,6 @@ export default class Articles {
 
     return this._$http(request).then((res) => res.data.article);
   }
-
 
   favorite(slug) {
     return this._$http({
