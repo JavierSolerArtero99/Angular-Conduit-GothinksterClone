@@ -1,1 +1,7 @@
 <motorbike-preview ng-repeat="motorbike in $ctrl.motorbikes" motorbike="motorbike"></motorbike-preview>
+
+<list-pagination
+    total-pages="$ctrl.listConfig.totalPages"
+    current-pages="$ctrl.listConfig.currentPage"
+    ng-hide="$ctrl.listConfig.totalPages <= 1"
+></list-pagination>
