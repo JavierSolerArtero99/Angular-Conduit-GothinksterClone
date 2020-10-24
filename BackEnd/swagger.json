@@ -1223,35 +1223,37 @@
     "Motorbike": {
       "type": "object",
       "properties": {
-        "slug": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "cv": {
-          "type": "string"
-        },
-        "color": {
-          "type": "string"
-        },
-        "motorbikeTags": {
-          "type": "array",
-          "items": {
+        "motorbike": {
+          "slug": {
             "type": "string"
-          }
-        },
-        "motorbikeComments": {
-          "type": "array",
-          "items": {
+          },
+          "name": {
+            "type": "string"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "motorbikeTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "motorbikeComments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "favoritesCount": {
+            "type": "integer"
+          },
+          "owner": {
             "$ref": "#/definitions/Profile"
           }
-        },
-        "favoritesCount": {
-          "type": "integer"
-        },
-        "owner": {
-          "$ref": "#/definitions/Profile"
         }
       }
     },
@@ -1379,7 +1381,7 @@
     "NewMotorbikeRequest": {
       "type": "object",
       "properties": {
-        "article": {
+        "motorbike": {
           "$ref": "#/definitions/NewMotorbike"
         }
       },
@@ -1404,19 +1406,21 @@
     "UpdateMotorbike": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        },
-        "cv": {
-          "type": "string"
-        },
-        "color": {
-          "type": "string"
-        },
-        "motorbikeTags": {
-          "type": "array",
-          "items": {
+        "motorbike": {
+          "name": {
             "type": "string"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "motorbikeTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
@@ -1435,7 +1439,7 @@
     "UpdateMotorbikeRequest": {
       "type": "object",
       "properties": {
-        "article": {
+        "motorbike": {
           "$ref": "#/definitions/UpdateMotorbike"
         }
       },
