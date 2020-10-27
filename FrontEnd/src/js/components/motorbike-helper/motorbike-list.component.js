@@ -52,6 +52,7 @@ class MotorbikeListCtrl {
             .then((res) => {
                 this.loading = false;
                 (res.motorbike) ? this.motorbikes = res.motorbike : this.motorbikes = res.motorbikes;
+                console.log(this.motorbikes);
                 this.listConfig.totalPages = Math.ceil(res.motorbikesCount / this.limit);
             })
     }

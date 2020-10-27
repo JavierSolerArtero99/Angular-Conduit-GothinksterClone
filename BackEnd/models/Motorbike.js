@@ -43,6 +43,21 @@ MotorbikeSchema.methods.updateFavoriteCount = function () {
 };
 
 MotorbikeSchema.methods.toJSONFor = function (user) {
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log(this.owner);
+  console.log(user );
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  (this.owner) ? userTo = this.owner : userTo = user
   return {
     slug: this.slug,
     name: this.name,
@@ -54,7 +69,7 @@ MotorbikeSchema.methods.toJSONFor = function (user) {
     favoritesCount: this.favoritesCount,
     motorbikeComments: this.motorbikeComments,
     motorbikeTags: this.motorbikeTags,
-    owner: this.owner.toProfileJSONFor(user)
+    owner: this.owner
   };
 };
 

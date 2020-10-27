@@ -286,5 +286,4 @@ router.delete('/:motorbike/comments/:comment', auth.required, function (req, res
     //     .catch((error) => console.log(error))
 });
 
-
 module.exports = router;
