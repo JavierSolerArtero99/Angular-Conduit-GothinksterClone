@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
 const Motorbike = mongoose.model('Motorbike');
+const MotorbikeComment = mongoose.model('MotorbikeComment');
 const User = mongoose.model('User');
 const faker = require('faker');
 
@@ -28,7 +29,7 @@ router.post('/generateMotorbikes/:qty', async (req, res, next) => {
         ];
         var qty = req.params.qty;
         var users = await User.find()
-        
+
         var tags = await Motorbike.find().distinct('motorbikeTags');
         var tag = tags[Math.floor(faker.random.number(tags.length - 1))];
 
@@ -52,6 +53,15 @@ router.post('/generateMotorbikes/:qty', async (req, res, next) => {
     }
 });
 
+router.delete('/deleteMotorbikeAndFeatures/:slug', async (req, res, next) => {
+    var motorbikeToDelete = await Motorbike.findOne({ slug: req.params.slug }).populate("motorbikeComments")
 
+    // eliminacion en la tabla de comentarios
+    for (let i = 0; i < motorbikeToDelete.motorbikeComments.length; i++) {
+        await MotorbikeComment.remove({ _id: motorbikeToDelete.motorbikeComments[i]._id })
+    }
+
+    await Motorbike.remove({_id: motorbikeToDelete._id})
+});
 
 module.exports = router;
