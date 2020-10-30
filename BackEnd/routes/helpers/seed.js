@@ -5,6 +5,7 @@ const MotorbikeComment = mongoose.model('MotorbikeComment');
 const User = mongoose.model('User');
 const faker = require('faker');
 
+/** Genera motos de forma aleatoria asignadoselas a un usuario tambien de forma aleatoria*/
 router.post('/generateMotorbikes/:qty', async (req, res, next) => {
     try {
         var toInsert = [];
@@ -53,15 +54,79 @@ router.post('/generateMotorbikes/:qty', async (req, res, next) => {
     }
 });
 
+/** Elimina la moto pasada por parametro y todos de los comentarios  que estas tienen */
 router.delete('/deleteMotorbikeAndFeatures/:slug', async (req, res, next) => {
-    var motorbikeToDelete = await Motorbike.findOne({ slug: req.params.slug }).populate("motorbikeComments")
+    try {
+        var motorbikeToDelete = await Motorbike.findOne({ slug: req.params.slug }).populate("motorbikeComments")
 
-    // eliminacion en la tabla de comentarios
-    for (let i = 0; i < motorbikeToDelete.motorbikeComments.length; i++) {
-        await MotorbikeComment.remove({ _id: motorbikeToDelete.motorbikeComments[i]._id })
+        // eliminacion en la tabla de comentarios
+        for (let i = 0; i < motorbikeToDelete.motorbikeComments.length; i++) {
+            await MotorbikeComment.remove({ _id: motorbikeToDelete.motorbikeComments[i]._id })
+        }
+
+        //eliminacion de favoritos de todos los usuarios que le han dado like
+        var usersLikesMotorbike = await User.find({favoritesMotorbikes: motorbikeToDelete._id})
+        for (let i = 0; i < usersLikesMotorbike.length; i++) {
+            console.log(usersLikesMotorbike[i].username);            
+            await usersLikesMotorbike[i].favoritesMotorbikes.remove(motorbikeToDelete._id)
+            await usersLikesMotorbike[i].save()
+        }
+
+        await Motorbike.remove({ _id: motorbikeToDelete._id })
+        return res.sendStatus(200);
+    } catch (error) {
+        return res.sendStatus(404);
     }
+});
 
-    await Motorbike.remove({_id: motorbikeToDelete._id})
+/** Elimina un usuario y todos los datos de este */
+router.delete('/deleteUserAndFeatures/:user', async (req, res, next) => {
+    try {
+        // Busqueda del usuario
+        var user = await User.findOne({ username: req.params.user })
+
+        // Restando el numero de favoritos de todas las motos favoritas del usuario
+        for (let i = 0; i < user.favoritesMotorbikes.length; i++) {
+            var favoiteOne = await Motorbike.findOne({ _id: user.favoritesMotorbikes[i] })
+            favoiteOne.favoritesCount--
+            await favoiteOne.save()
+        }
+
+        // Eliminando el usuario de la lista de seguidos de todos los usuarios
+        var userFollowers = await User.find({ following: user._id })
+        for (let i = 0; i < userFollowers.length; i++) {
+            userFollowers[i].following.remove(user._id)
+            await userFollowers[i].save()
+        }
+
+        // Eliminando datos de las motos del usuario que afectan a otros usuarios
+        var userMotorbikes = await Motorbike.find({ owner: user._id })
+        for (let i = 0; i < userMotorbikes.length; i++) {
+            // Eliminando comentarios de los usuarios que han comentado en las motos del usuario a borrar
+            for (let j = 0; j < userMotorbikes[i].motorbikeComments.length; j++) {
+                console.log(userMotorbikes[i].motorbikeComments[j]);
+                await MotorbikeComment.remove({ _id: userMotorbikes[i].motorbikeComments[j] })
+            }
+
+            // Eliminando la moto de los favoritos de todos los usuarios que le hayan dado like
+            let allUserFavoriteMotorbike = await User.find({ favoritesMotorbikes: userMotorbikes[i] })
+            for (let j = 0; j < allUserFavoriteMotorbike.length; j++) {
+                allUserFavoriteMotorbike[j].favoritesMotorbikes.remove(userMotorbikes[i]._id)
+                await allUserFavoriteMotorbike[j].save()
+            }
+
+            userMotorbikes[i].remove()
+            await userMotorbikes[i].save()
+        }
+
+        await user.remove()
+
+        return res.sendStatus(200);
+
+    } catch (error) {
+        console.log(error);
+        return res.sendStatus(404);
+    }
 });
 
 module.exports = router;
