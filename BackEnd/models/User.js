@@ -8,6 +8,8 @@ var UserSchema = new mongoose.Schema({
   idsocial: String,
   username: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/^[a-zA-Z0-9]+$/, 'is invalid'], index: true },
   email: { type: String, lowercase: true, unique: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, 'is invalid'], index: true },
+  isAdmin: Boolean,
+  karmaLvl: Number,
   bio: String,
   image: String,
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
@@ -56,7 +58,8 @@ UserSchema.methods.toProfileJSONFor = function (user) {
     username: this.username,
     bio: this.bio,
     image: this.image || 'https://static.productionready.io/images/smiley-cyrus.jpg',
-    following: user ? user.isFollowing(this._id) : false
+    following: user ? user.isFollowing(this._id) : false,
+    karmaLvl: this.karmaLvl
   };
 };
 
@@ -124,6 +127,13 @@ UserSchema.methods.isFollowing = function (id) {
   return this.following.some(function (followId) {
     return followId.toString() === id.toString();
   });
+};
+
+/* KARMA */
+
+UserSchema.methods.updateKarma = function (cuantity) {
+  this.karmaLvl += cuantity
+  return this.save();
 };
 
 mongoose.model('User', UserSchema);

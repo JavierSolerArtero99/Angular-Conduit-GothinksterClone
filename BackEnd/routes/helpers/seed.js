@@ -65,9 +65,9 @@ router.delete('/deleteMotorbikeAndFeatures/:slug', async (req, res, next) => {
         }
 
         //eliminacion de favoritos de todos los usuarios que le han dado like
-        var usersLikesMotorbike = await User.find({favoritesMotorbikes: motorbikeToDelete._id})
+        var usersLikesMotorbike = await User.find({ favoritesMotorbikes: motorbikeToDelete._id })
         for (let i = 0; i < usersLikesMotorbike.length; i++) {
-            console.log(usersLikesMotorbike[i].username);            
+            console.log(usersLikesMotorbike[i].username);
             await usersLikesMotorbike[i].favoritesMotorbikes.remove(motorbikeToDelete._id)
             await usersLikesMotorbike[i].save()
         }
@@ -122,6 +122,21 @@ router.delete('/deleteUserAndFeatures/:user', async (req, res, next) => {
         await user.remove()
 
         return res.sendStatus(200);
+
+    } catch (error) {
+        console.log(error);
+        return res.sendStatus(404);
+    }
+});
+
+/** Observa el tipo del usuario */
+router.get('/isAdmin/:user', async (req, res, next) => {
+    try {
+        var userToSearch = await User.findOne({ username: req.params.user })
+
+        if (!userToSearch) return res.sendStatus(404)
+
+        return res.json({isAdmin: userToSearch.isAdmin})
 
     } catch (error) {
         console.log(error);

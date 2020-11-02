@@ -266,7 +266,8 @@ router.post('/:motorbike/comments', auth.required, function (req, res, next) {
 
         return comment.save().then(function () {
             req.motorbike.motorbikeComments === undefined ? req.motorbike.motorbikeComments = [] : req.motorbike.motorbikeComments = req.motorbike.motorbikeComments.concat(comment);
-
+            user.updateKarma(1)
+            
             return req.motorbike.save().then(function (motorbike) {
                 res.json({ comment: comment.toJSONFor(user) });
             });
