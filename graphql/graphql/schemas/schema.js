@@ -17,10 +17,12 @@ const Query = gql`
 `;
 
 import User from "../../graphql/schemas/users/user.schema";
+import Pilot from "../../graphql/schemas/pilots/pilot.schema";
 
 const typeDefs = [
     Query,
     User,
+    Pilot,
 ];
 
 export default typeDefs;

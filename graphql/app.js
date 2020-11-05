@@ -57,6 +57,7 @@ function mongooseConnect() {
 mongooseConnect()
 
 require('./models/User');
+require('./models/Pilot');
 
 app.use(require('./routes'));
 //// Swagger ////
