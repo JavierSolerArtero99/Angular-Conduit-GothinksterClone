@@ -3,6 +3,16 @@ import angular from 'angular';
 // Create the module where our functionality can attach to
 let servicesModule = angular.module('app.services', []);
 
+/*GRAPHQL*/
+
+import GraphQLClientService from './graphql.service';
+servicesModule.service('GraphQLClientService', GraphQLClientService)
+
+import PilotService from './pilot.service';
+servicesModule.service('Pilot', PilotService)
+
+/*REST*/
+
 import UserService from './user.service';
 servicesModule.service('User', UserService);
 

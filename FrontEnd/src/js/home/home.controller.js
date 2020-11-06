@@ -1,5 +1,5 @@
 class HomeCtrl {
-  constructor(User, MotorbikeTags, motorbikes, AppConstants, $scope) {
+  constructor(User, MotorbikeTags, motorbikes, Pilot, AppConstants, $scope) {
     'ngInject';
 
     this.appName = AppConstants.appName;
