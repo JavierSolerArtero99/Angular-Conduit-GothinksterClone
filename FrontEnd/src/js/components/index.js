@@ -26,6 +26,11 @@ componentsModule.component('articleList', ArticleList);
 import ListPagination from './article-helpers/list-pagination.component';
 componentsModule.component('listPagination', ListPagination);
 
+import homeSlider from './../home/homeSlider.component';
+componentsModule.component('homeSlider', homeSlider);
+
+/* MOTORBIKE COMPONENTS */
+
 import MotorbikeList from './motorbike-helper/motorbike-list.component';
 componentsModule.component('motorbikeList', MotorbikeList);
 
@@ -38,7 +43,12 @@ componentsModule.component('motorbikeActions', MotorbikeActions);
 import MotorbikeDetails from './motorbike-helper/motorbike-details.component';
 componentsModule.component('motorbikeDetails', MotorbikeDetails);
 
-import homeSlider from './../home/homeSlider.component';
-componentsModule.component('homeSlider', homeSlider);
+/* PILOT COMPONENTS */
+
+import PilotList from './pilot-helpers/pilot-list.component';
+componentsModule.component('pilotList', PilotList);
+
+import PilotPreview from './pilot-helpers/pilot-preview';
+componentsModule.component('pilotPreview', PilotPreview);
 
 export default componentsModule;

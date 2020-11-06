@@ -8,6 +8,7 @@ const typeDefs = gql`
     type Pilot {
         id: ID!
         name: String,
+        img: String,
         team: String,
         age: Int,
         country: String,

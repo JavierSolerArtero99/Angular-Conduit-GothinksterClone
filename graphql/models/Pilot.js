@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var PilotSchema = new mongoose.Schema({
     name: String,
+    img: String,
     team: String,
     age: Number,
     country: String,

@@ -9,10 +9,6 @@ class PilotCtrl {
         this._$scope.pilots = pilots;
         this.pilots = pilots;
     }
-
-    $onInit(){
-        console.log(this.pilots);
-    }
 }
 
 export default PilotCtrl;

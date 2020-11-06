@@ -20,6 +20,7 @@ export default class Pilots {
             pilots {
                 id
                 name
+                img
                 team
                 age
                 country
@@ -45,6 +46,7 @@ export default class Pilots {
             pilot(name: "${name}"){
                 id
                 name
+                img
                 team
                 age
                 country

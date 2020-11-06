@@ -1,15 +1,14 @@
-class MotorbikeListCtrl {
-    constructor(Motorbikes, $scope) {
+class PilotListCtrl {
+    constructor(Pilot, $scope) {
         'ngInject';
 
-        this._Motorbikes = Motorbikes;
+        this._Pilot = Pilot;
         this._$scope = $scope;
-        this._$scope.openDetails = function () {
-            $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
-        };
+        // this._$scope.openDetails = function () {
+        //     $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
+        // };
         this.$onInit = function () {
             console.log("LIST CONFIG");
-            console.log(this.listConfig);
             this.setListTo(this.listConfig);
         }
         $scope.$on('setListTo', (ev, newList) => {
@@ -49,23 +48,23 @@ class MotorbikeListCtrl {
 
         queryConfig.filters.offset = (this.limit * (this.listConfig.currentPage - 1));
 
-        this._Motorbikes
-            .query(queryConfig)
+        this._Pilot
+            .getAll(queryConfig)
             .then((res) => {
                 this.loading = false;
-                (res.motorbike) ? this.motorbikes = res.motorbike : this.motorbikes = res.motorbikes;
-                this.listConfig.totalPages = Math.ceil(res.motorbikesCount / this.limit);
+                this.pilots = res.pilots;
+                console.log(this.pilots);
             })
     }
 }
 
-let MotorbikeList = {
+let PilotList = {
     bindings: {
         limit: '=',
         listConfig: '=',
     },
-    controller: MotorbikeListCtrl,
-    templateUrl: 'components/motorbike-helper/motorbike-list.html'
+    controller: PilotListCtrl,
+    templateUrl: 'components/pilot-helpers/pilot-list.html'
 }
 
-export default MotorbikeList;
+export default PilotList;
