@@ -1,9 +1,10 @@
 class PilotListCtrl {
-    constructor(Pilot, $scope) {
+    constructor(Pilot, $scope, $state) {
         'ngInject';
 
         this._Pilot = Pilot;
         this._$scope = $scope;
+        this._$state = $state
         // this._$scope.openDetails = function () {
         //     $state.go("app.motorbikeDetails", { id: this.motorbike["slug"] });
         // };
@@ -18,7 +19,11 @@ class PilotListCtrl {
         $scope.$on('setPageTo', (ev, pageNumber) => {
             this.setPageTo(pageNumber);
         });
+    }
 
+    goCreatePilot() {
+        console.log("akjsjdkdbflkj");
+        this._$state.go("app.home")
     }
 
     setListTo(newList) {

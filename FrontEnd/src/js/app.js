@@ -22,6 +22,7 @@ import './settings';
 import './editor';
 import './car';
 import './motorbike';
+import './pilotEditor'
 import './pilot';
 
 // Create and bootstrap application
@@ -42,6 +43,7 @@ const requires = [
   'app.motorbike',
   'app.motorbikeDetails',
   'app.pilot',
+  'app.newPilot',
   'app.sociallogin',
   'ngMessages',
   toastr
