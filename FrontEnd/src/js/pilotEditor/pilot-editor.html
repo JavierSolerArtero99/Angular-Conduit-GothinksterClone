@@ -6,34 +6,38 @@
         <list-errors errors="$ctrl.errors"></list-errors>
 
         <form>
-          <!-- <fieldset ng-disabled="$ctrl.isSubmitting">
+          <fieldset ng-disabled="$ctrl.isSubmitting">
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg" ng-model="$ctrl.motorbike.name" type="text"
-                placeholder="Motorbike Name" />
+              <input class="form-control form-control-lg" ng-model="$ctrl.pilot.name" type="text"
+                placeholder="Pilot Name" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control" ng-model="$ctrl.motorbike.cv" type="text" placeholder="CV" />
+              <input class="form-control" ng-model="$ctrl.pilot.img" type="text" placeholder="Image" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control" ng-model="$ctrl.motorbike.color" type="text" placeholder="Color" />
+              <input class="form-control" ng-model="$ctrl.pilot.age" type="number" placeholder="Age" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control" ng-model="$ctrl.newTag" type="text" placeholder="Motorbike Tags" />
+              <input class="form-control" ng-model="$ctrl.pilot.cc" type="text" placeholder="CC" />
             </fieldset>
 
-            <li class="tag-default tag-pill tag-outline" ng-repeat="tag in $ctrl.motorbike.motorbikeTags">
-              {{tag}}
-            </li>
+            <fieldset class="form-group">
+              <input class="form-control" ng-model="$ctrl.pilot.mundialChapionship" type="number" placeholder="World Championship" />
+            </fieldset>
+
+            <fieldset class="form-group">
+              <input class="form-control" ng-model="$ctrl.pilot.country" type="text" placeholder="Country" />
+            </fieldset>
 
             <button class="btn btn-lg pull-xs-right btn-primary" type="button" ng-click="$ctrl.submit()">
-              Publish Motorbike
+              Publish Pilot
             </button>
 
-          </fieldset> -->
+          </fieldset>
         </form>
 
       </div>

@@ -3,7 +3,16 @@ class EditorCtrl {
     'ngInject';
     this._Pilot = Pilot;
     this._$state = $state;
-    this.newTag = ''
+    this.newTag = '';
+
+    (!pilot) && (this.pilot = {
+      name: "",
+      img: "",
+      age: 20,
+      cc: "",
+      mundialChapionship: 0,
+      country: "",
+    })
 
     // if (!motorbike) {
     //   this.motorbike = {
@@ -19,6 +28,7 @@ class EditorCtrl {
   }
 
   submit() {
+    console.log(this.pilot);
     // this.isSubmitting = true;
     // if (this.newTag && this.newTag.length >= 1) {
     //   this.motorbike.motorbikeTags.push(this.newTag)

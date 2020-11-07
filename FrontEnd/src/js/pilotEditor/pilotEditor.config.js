@@ -3,10 +3,10 @@ function EditorConfig($stateProvider) {
 
   $stateProvider
     .state('app.newPilot', {
-      url: '/editor/:slug',
+      url: '/pilot-editor/',
       controller: 'EditorCtrl',
       controllerAs: '$ctrl',
-      templateUrl: 'editor/pilot-editor.html',
+      templateUrl: 'pilotEditor/pilot-editor.html',
       title: 'New Pilot Editor',
       resolve: {
         auth: function (User) {
