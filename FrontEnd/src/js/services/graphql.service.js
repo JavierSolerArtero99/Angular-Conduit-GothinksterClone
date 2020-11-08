@@ -15,15 +15,15 @@ export default class GraphQL {
         this._JWT = JWT;
     }
 
-    createClient(server = this._AppConstants.api_gql  + "/graphql/") {
+    createClient(server = this._AppConstants.api_gql + "/graphql/") {
         return new ApolloClient({
-            link: createHttpLink({uri: server}),
+            link: createHttpLink({ uri: server }),
             cache: new InMemoryCache
         })
     }
 
     createAuthClient() {
-        return setContext((_, {headers}) => {
+        return setContext((_, { headers }) => {
             let token = this._JWT.get();
             return {
                 headers: {
@@ -36,7 +36,7 @@ export default class GraphQL {
     get(query, server = this._AppConstants.api_gql + "/graphql/") {
         let deferred = this._$q.defer();
         if (!this._clients.has(server)) {
-            this._clients.set(server, this.createClient(server));   
+            this._clients.set(server, this.createClient(server));
         }
 
         this._clients.get(server).query({
@@ -59,6 +59,22 @@ export default class GraphQL {
         );
 
         return deferred.promise
+    }
+
+    mutate(mutation, server = this._AppConstants.api_gql + "/graphql/") {
+        let deferred = this._$q.defer();
+
+        if (!this._clients.has(server)) {
+            this._clients.set(server, this.createClient(server));
+        }
+
+        this._clients.get(server).mutate({
+            mutation: gql(mutation)
+        }).then(
+            (res) => deferred.resolve(res.data),
+            (err) => {deferred.reject(err)}
+        );
+        return deferred.promise;
     }
 
 }

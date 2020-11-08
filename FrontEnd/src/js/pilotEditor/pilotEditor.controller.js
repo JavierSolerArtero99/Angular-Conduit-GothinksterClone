@@ -6,12 +6,13 @@ class EditorCtrl {
     this.newTag = '';
 
     (!pilot) && (this.pilot = {
-      name: "",
-      img: "",
+      name: "Dovi",
+      img: "nomia",
       age: 20,
-      cc: "",
+      cc: 250,
+      team: "asdf",
       mundialChapionship: 0,
-      country: "",
+      country: "asdf",
     })
 
     // if (!motorbike) {
@@ -28,7 +29,9 @@ class EditorCtrl {
   }
 
   submit() {
-    console.log(this.pilot);
+    this._Pilot.savePilot(this.pilot).then(
+      // (newPilot) => {console.log("GUARDADO", newPilot)}
+    )
     // this.isSubmitting = true;
     // if (this.newTag && this.newTag.length >= 1) {
     //   this.motorbike.motorbikeTags.push(this.newTag)

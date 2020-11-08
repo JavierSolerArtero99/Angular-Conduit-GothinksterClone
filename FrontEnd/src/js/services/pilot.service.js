@@ -29,7 +29,6 @@ export default class Pilots {
             }
         } 
         `
-        console.log("Despues del service");
         return this._GQL.get(query);
     }
 
@@ -57,4 +56,30 @@ export default class Pilots {
         `
         return this._GQL.get(query)
     }
+
+    savePilot(pilotInput) {
+        console.log("SSE VA A AñADITRRR", pilotInput);
+        let createPilot = `
+            mutation {
+                createPilot(input:{
+                    name: "${pilotInput.name}",
+                    img: "${pilotInput.img}",
+                    team: "${pilotInput.team}",
+                    age: ${pilotInput.age},
+                    country: "${pilotInput.country}",
+                    cc: ${pilotInput.cc},
+                    mundialChapionship: ${pilotInput.mundialChapionship}
+                    }) {
+                        name,
+                        img,
+                        team,
+                        age,
+                        country,
+                        cc,
+                        mundialChapionship
+                }
+         }`
+        return this._GQL.mutate(createPilot)
+    }
+
 }
