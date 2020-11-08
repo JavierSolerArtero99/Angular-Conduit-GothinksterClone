@@ -44,6 +44,7 @@ const requires = [
   'app.motorbikeDetails',
   'app.pilot',
   'app.newPilot',
+  'app.pilotDetails',
   'app.sociallogin',
   'ngMessages',
   toastr

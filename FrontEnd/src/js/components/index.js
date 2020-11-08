@@ -51,4 +51,7 @@ componentsModule.component('pilotList', PilotList);
 import PilotPreview from './pilot-helpers/pilot-preview';
 componentsModule.component('pilotPreview', PilotPreview);
 
+import PilotDetails from './pilot-helpers/pilot.detail.component';
+componentsModule.component('motorbikeDetails', PilotDetails);
+
 export default componentsModule;
