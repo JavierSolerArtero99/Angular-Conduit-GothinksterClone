@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  web:
+    build: ./BackEnd
+    volumes:
+      - ./BackEnd/:/app
+      - BackEnd/app/node_modules
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - /data/db
+
+  graph:
+    build: ./graphql
+    volumes:
+      - ./graphql/:/app
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
