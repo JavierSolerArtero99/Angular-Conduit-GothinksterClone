@@ -1,29 +1,37 @@
-version: '2'
+version: "3"
 
 services:
-  web:
-    build: ./BackEnd
-    volumes:
-      - ./BackEnd/:/app
-      - BackEnd/app/node_modules
-    ports:
-      - '3000:3000'
-    depends_on:
-      - mongo
+    rest:
+        image: mhart/alpine-node:8
+        command: npm run dev
+        restart: on-failure
+        working_dir: /app
+        volumes:
+            - ./BackEnd:/app
+        ports:
+            - "3000:3000"
+        links: 
+            - 'mongo'
+        depends_on:
+            - 'mongo'
 
-  mongo:
-    image: mongo
-    ports:
-      - '27017:27017'
-    volumes:
-      - /data/db
+    graphql:
+        image: mhart/alpine-node:8
+        command: npm run dev
+        restart: on-failure
+        working_dir: /app
+        volumes:
+            - ./graphql:/app
+        ports:
+            - "3002:3002"
+        links: 
+            - 'mongo'
+        depends_on:
+            - 'mongo'
 
-  graph:
-    build: ./graphql
-    volumes:
-      - ./graphql/:/app
-      - /app/node_modules
-    ports:
-      - '3000:3000'
-    depends_on:
-      - mongo
+    mongo:
+        image: mvertes/alpine-mongo
+        ports:
+            - "27017:27017"
+        volumes:
+            - /data/db
