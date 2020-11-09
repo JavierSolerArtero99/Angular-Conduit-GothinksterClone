@@ -5,22 +5,23 @@ This is an application based on an example already made by [gothinkster](https:/
 
 1. Install MongoDB and start it
 2. Install Docker and Docker Compose.
-3. Clone the repository.
-4. Launch the docker compose file
-5. Execute "gulp" in frontend side
+3. Install node and npm
+4. Clone the repository.
+5. Launch the docker compose file
+6. Execute "gulp" in frontend side
 
 ## Tecnologies
 
+- Mongo
 - NodeJS
 - AngularJS 1.5
 - GraphQL
 - Docker
-- Mongo
 
 ### Libraries
 
-- JWT
 - Toastr
+- JWT
 - FakerJS
 - Gulp
 - Swagger

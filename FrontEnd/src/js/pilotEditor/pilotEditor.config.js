@@ -1,4 +1,4 @@
-function EditorConfig($stateProvider) {
+function PilotEditorConfig($stateProvider) {
   'ngInject';
 
   $stateProvider
@@ -35,4 +35,4 @@ function EditorConfig($stateProvider) {
 
 };
 
-export default EditorConfig;
+export default PilotEditorConfig;

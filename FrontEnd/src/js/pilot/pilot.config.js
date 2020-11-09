@@ -1,4 +1,4 @@
-function MotorbikeConfig($stateProvider) {
+function PilotConfig($stateProvider) {
   'ngInject';
 
   $stateProvider
@@ -38,4 +38,4 @@ function MotorbikeConfig($stateProvider) {
 
 };
 
-export default MotorbikeConfig;
+export default PilotConfig;
